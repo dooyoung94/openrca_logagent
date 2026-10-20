@@ -142,7 +142,7 @@
     }
   ],
   "hf_progress": {
-    "checked_at": "2026-10-20T13:43:12.032Z",
+    "checked_at": "2026-10-20T13:45:09.943347+00:00",
     "source_run_id": "39419829987",
     "source_commit": "5da5d75fa88d555acbec615992a7eaef2dae9b52",
     "run_status": "in_progress",
@@ -358,7 +358,7 @@
     "results/v1/results.json": "242b11d0773e8027a056abbd1f0db94c31d25d0426b42374db3b08a00d0bfb87",
     "results/v1/upstream_scorer_validation.json": "eeb3dc89961159da18c9059719c975633420c7d16ca09b325cd82db010887e72",
     "results/baseline_public.json": "53cae99b88dddabc6419b51683bbca9b3a48fb92af13c1cf0ae4e1e70b1b4643",
-    "experiments/hf_tool_loop_progress.json": "344392fed9e4ac33aeb587e4450b4efd7bcc73d4f75d437d39a224c6e7c356bb",
+    "experiments/hf_tool_loop_progress.json": "e0bf79bfa221c763ba1b87cc4a8c4b6905b3c3d688038fe063021a54464c580d",
     "experiments/paper_graph_availability.json": "9d8c7069cd1de16822f0b408c1b688878182be021e3df9e360a6e5ee8c166b11",
     "experiments/historical_source_verification.json": "747105927f42ce24e32f15a0def6fb6b94f79c7d50f4619c302ea2d07b224cb6"
   }
