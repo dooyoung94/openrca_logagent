@@ -1,10 +1,10 @@
 {
-  "checked_at": "2026-10-20T13:45:09.943347+00:00",
+  "checked_at": "2026-10-20T13:56:13.876242+00:00",
   "source_run_id": "39419829987",
   "source_commit": "5da5d75fa88d555acbec615992a7eaef2dae9b52",
   "run_status": "in_progress",
   "run_conclusion": null,
-  "completed_case_jobs": 5,
+  "completed_case_jobs": 9,
   "failed_case_jobs": 0,
   "jobs": [
     {
@@ -16,8 +16,8 @@
     {
       "id": 118617714025,
       "name": "HF loop case 005",
-      "status": "in_progress",
-      "conclusion": null
+      "status": "completed",
+      "conclusion": "success"
     },
     {
       "id": 118617714051,
@@ -40,8 +40,8 @@
     {
       "id": 118617714182,
       "name": "HF loop case 014",
-      "status": "in_progress",
-      "conclusion": null
+      "status": "completed",
+      "conclusion": "success"
     },
     {
       "id": 118617714198,
@@ -82,14 +82,14 @@
     {
       "id": 118617714343,
       "name": "HF loop case 013",
-      "status": "in_progress",
-      "conclusion": null
+      "status": "completed",
+      "conclusion": "success"
     },
     {
       "id": 118617714422,
       "name": "HF loop case 003",
-      "status": "in_progress",
-      "conclusion": null
+      "status": "completed",
+      "conclusion": "success"
     }
   ]
 }
