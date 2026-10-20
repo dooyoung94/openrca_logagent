@@ -1,0 +1,9 @@
+{
+  "experiment": "hf-local-summary-pilot-v2",
+  "status": "RUNNING",
+  "observed_at": "2026-10-20T09:28:10.044125+00:00",
+  "planned_cells": 56,
+  "completed_cells": 4,
+  "accuracy": null,
+  "note": "Score only after all predictions are sealed. Original six-model experiment remains unexecuted."
+}

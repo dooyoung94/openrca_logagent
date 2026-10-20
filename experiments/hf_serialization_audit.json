@@ -1,0 +1,77 @@
+{
+  "checked_cases": 14,
+  "content_reduction": false,
+  "change": "Object keys replaced by one header and ordered rows; every original observation/statistic preserved. Exact-token-prefix cache reuses only unchanged prompt tokens.",
+  "checks": [
+    {
+      "packet": "semantic-rca-transfer-001.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-002.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-003.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-004.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-005.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-006.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-007.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-008.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-009.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-010.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-011.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-012.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-013.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    },
+    {
+      "packet": "semantic-rca-transfer-014.json",
+      "same_packet_bytes": true,
+      "all_summary_facts_preserved": true
+    }
+  ]
+}

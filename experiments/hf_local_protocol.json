@@ -1,0 +1,145 @@
+{
+  "experiment": "hf-local-summary-pilot-v2",
+  "status": "FROZEN_BEFORE_INFERENCE",
+  "frozen_at": "2026-10-20T09:16:43.142500+00:00",
+  "model": {
+    "repo_id": "Qwen/Qwen3-1.7B-GGUF",
+    "revision": "90862c4b9d2787eaed51d12237eafdfe7c5f6077",
+    "filename": "Qwen3-1.7B-Q8_0.gguf",
+    "sha256": "061b54daade076b5d3362dac252678d17da8c68f07560be70818cace6590cb1a"
+  },
+  "configuration": {
+    "arms": [
+      "summary_llm",
+      "logagent_llm"
+    ],
+    "seeds": [
+      17,
+      29
+    ],
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "context_tokens": 8192,
+    "max_output_tokens": 384,
+    "thinking": false,
+    "grammar": "frozen JSON schema",
+    "per_cell_retries": 0,
+    "tools": 0,
+    "kv_cache": "exact prompt prefix reused only within the same case; reset between cases",
+    "case_order": "frozen opaque ID order; alternating arm order"
+  },
+  "benchmark_revision": "fdfbca65c87c36c6b06bddfa6d611544f13bfa34",
+  "cases": [
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "dataset": "openrca2",
+      "ordinal": 0
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "dataset": "openrca2",
+      "ordinal": 1
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "dataset": "openrca2",
+      "ordinal": 2
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "dataset": "openrca2",
+      "ordinal": 3
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "dataset": "openrca2",
+      "ordinal": 4
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "dataset": "openrca2",
+      "ordinal": 5
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "dataset": "openrca2",
+      "ordinal": 6
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "dataset": "openrca2",
+      "ordinal": 7
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "dataset": "openrca2",
+      "ordinal": 8
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "dataset": "openrca2",
+      "ordinal": 9
+    },
+    {
+      "case_id": "semantic-rca-transfer-011",
+      "dataset": "rca100",
+      "ordinal": 10
+    },
+    {
+      "case_id": "semantic-rca-transfer-012",
+      "dataset": "rca100",
+      "ordinal": 11
+    },
+    {
+      "case_id": "semantic-rca-transfer-013",
+      "dataset": "rca100",
+      "ordinal": 12
+    },
+    {
+      "case_id": "semantic-rca-transfer-014",
+      "dataset": "rca100",
+      "ordinal": 13
+    }
+  ],
+  "files_sha256": {
+    "src/logagent_bench/__init__.py": "32ef06936324e926cca0645e7450dbefc0ded6ef11733021b10d6d52c9ec0c26",
+    "src/logagent_bench/adapter.py": "4636dab5ef4b6421d32b7afce0d4bedd179ced6ebdf6f432878e89b6585a1296",
+    "src/logagent_bench/canonical_scoring.py": "7669c9cb644cff93e9df4c7e0c62f9569350c8f3af00e73e98bc3e4c4bbfd929",
+    "src/logagent_bench/cli.py": "00918484c343ebbad1d550633423a99a6f312892467aca917b9c6a12db29b4bb",
+    "src/logagent_bench/datasets.py": "f2bf0868d8a8e19befcca7179219cb0032c09936dd371282e3e39b9e8d20dd41",
+    "src/logagent_bench/engine.py": "099f8d240237a61037eb1e70c361f1e3c448cfcb3abd6c54b920fac0fd2547b8",
+    "src/logagent_bench/experiment.py": "ad841db60fde9234dd1f9d5e7cec07bddc0d81a2a5aa39d24f07ce34b93e6537",
+    "src/logagent_bench/hf_local.py": "03135271718c2d3a394820b560119f8d84c6db4e50fc87797c89b2ffd31c6dc3",
+    "src/logagent_bench/hf_packet.py": "77c9945a31ad863204aeb0a5553e60a283fc7afe1af3892f1ab827c55815fef7",
+    "src/logagent_bench/hf_worker.py": "847eea8a823b74a97518e84cceac083bc462737f8a5677b43c79c3d2bf197090",
+    "src/logagent_bench/llm_runner.py": "4d60445386b4afb79e28bae4bb0fc0cfda673562b8d5c2912e7447ee89abc6c2",
+    "src/logagent_bench/llm_summary.py": "b2c24955e9a6635f9edfead085f39fee3db86fd33df5803e04217eb521d6d0c5",
+    "src/logagent_bench/paired_stats.py": "3a3705425260c434e789eaaffeeaa2b9fcb61eec7dd751993d753e8f057e75a8",
+    "src/logagent_bench/runner.py": "f1d20dfd016c1f471c40686f5aa35d533123705d19ba139cfe96c426c9fec8ce",
+    "src/logagent_bench/scoring.py": "54f9e44cc427dfbab85f4f039f6d06e6469e82f298ce9241504ada0a29b3f965",
+    "src/logagent_bench/upstream_bridge.py": "3093779c4feee4ea534a7eca2efea3c901d8369e3c2af52cd9b105f3e8bef860",
+    "src/logagent_bench/worker.py": "bb70873e47e712f55d25a1afd5fcb3a7c32e472e363ea39ea12b6098acefdbf5",
+    "configs/hypothesis.yaml": "f00ba92235a99348339e127ec28f2ceb152d2b12d06e07452385b135a248e519"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "cpu_count": 9,
+    "llama_cpp_python": "0.3.36",
+    "cpu_only": true,
+    "model_download_bytes": 1834426016
+  },
+  "scoring": "unchanged upstream evaluate_transfer_run diagnosis fields, after all predictions are sealed",
+  "data_boundary": "same 14 selected cases and windows; all 158 source hashes pinned; packets exclude labels",
+  "differences_from_original": [
+    "one local Qwen3-1.7B Q8 model replaces no original model",
+    "bounded telemetry summaries, not original Raw/Semantic Graph querying",
+    "single completion with JSON grammar, no SQL/PromQL investigation loop",
+    "8192 context, 384 output tokens, non-thinking; different from original model budgets",
+    "seeds 17 and 29; two repetitions, 56 model invocations",
+    "candidate hints include evidence-derived architecture analysis beyond bounded summaries",
+    "no claims of source citation grounding, Capability score, or six-model equivalence"
+  ],
+  "post_score_tuning": false
+}

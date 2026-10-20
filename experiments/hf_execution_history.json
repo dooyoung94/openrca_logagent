@@ -1,0 +1,21 @@
+{
+  "attempts": [
+    {
+      "experiment": "hf-local-summary-pilot-v1",
+      "status": "RESOURCE_ABORTED_BEFORE_SCORING",
+      "stopped_at": "2026-10-20T09:15:31.501248+00:00",
+      "completed_predictions": 1,
+      "started_cells": 2,
+      "accuracy": null,
+      "reason": "Initial prompt serialization was slow on CPU: no completed prediction at the 221-second check; by resource-stop, one prediction had completed and a second had started. No RCA answer content or correctness inspected. Preserve all telemetry packet values and model/settings; use header-row serialization and exact-prefix KV reuse in v2.",
+      "frozen_protocol_sha256": "3d63da1a0b77ddfa0f5dd1351ed5bc338b2b2fa0490e155ad94da446cc3dc5a8",
+      "preserved_prediction_hashes": {
+        "semantic-rca-transfer-001-summary_llm-rep0.json": "01324e8ae6869d71e3ed4eb2b131c74543da3b222183184d34c1b20dd1e0bac9"
+      },
+      "input_facts_unchanged": true,
+      "scoring_performed": false,
+      "actual_worker_stop_at": "2026-10-20T09:23:36.368660+00:00",
+      "termination_note": "An earlier numeric-PID stop did not reach the isolated exec session. Unified exec session 87628 was then interrupted with Ctrl-C and exited 130; the prior model worker is no longer running. This caused transient CPU contention during v2. No correctness inspected."
+    }
+  ]
+}
