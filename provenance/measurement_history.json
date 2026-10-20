@@ -1,0 +1,17 @@
+{
+  "attempts": [
+    {
+      "label": "initial adapter diagnostic attempt",
+      "protocol_sha256": "0bfcd3a815c72fecea593856979d5f80d15389643b1eda5566737449e8995ce4",
+      "status": "INVALIDATED_BEFORE_SCORING",
+      "reason": "A missing-service identity normalization defect was corrected. The protocol guard rejected mixed-code output. No scores from this attempt are reported."
+    },
+    {
+      "label": "frozen corrected adapter run",
+      "status": "COMPLETED",
+      "run_root": ".runs/measured-v1-corrected-adapter",
+      "change": "Exact telemetry pod/container identity join; no ground-truth based threshold or case-specific rule changes.",
+      "protocol_sha256": "1b0daa5ece77e915a3ac579e73b65c807394efc5fa16805e6169ebfeb37a62bd"
+    }
+  ]
+}

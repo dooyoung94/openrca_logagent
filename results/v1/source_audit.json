@@ -1,0 +1,1113 @@
+{
+  "expected_files": 158,
+  "verified_files": 158,
+  "records": [
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "abnormal_logs.parquet",
+      "sha256": "cc9c7e8e6013b2c0c2eb623e875a0321e38e9678ee555539140f0418f3e8dce0",
+      "bytes": 137324,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "c8620fe3205550fb91e1d952b73a85ccf8df6d74e61711a241ff5971169529fb",
+      "bytes": 40147,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "41ea619c160a80fd8d684047de49cd43e03e3ad62c3a2558a0e41acb47cc41f8",
+      "bytes": 11975,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "d4dec3959baf342db42a3ba0abaf7caf38c81b6df023122a7064725a19155e8c",
+      "bytes": 28999,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "abnormal_traces.parquet",
+      "sha256": "0710326780ae3d7951d374e944aa00df3063fec356e5822e07e408010584c7f4",
+      "bytes": 412190,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "conclusion.parquet",
+      "sha256": "0cc8663481771b195648755c4a0b5b8a41a7b149b92c1b3e1aa3d45e4c24246a",
+      "bytes": 5515,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "env.json",
+      "sha256": "c01997f34731b130addc8261c2df96c4b7d3ef1adbd0090961d71bc6024f6579",
+      "bytes": 188,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "injection.json",
+      "sha256": "e7f45a52d10bc545335265b73c8064a63799756f4f1e766b62734f49a119f1f2",
+      "bytes": 1219,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "normal_logs.parquet",
+      "sha256": "15db3dd2e86ad44e5af76857a8dcc2cf65553cbb2411bc0eb4fb93e200e6f4dd",
+      "bytes": 286163,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "normal_metrics.parquet",
+      "sha256": "65e07e0e3bd971e20eaae6f477fb0fd38c6214bae487d6baaf8545068d7c8259",
+      "bytes": 42843,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "130b5252772838be505d863e66cf3fb95688afb2f00ebf29fe22bf6a452eda92",
+      "bytes": 11498,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "1e898a11a5e46b83d2a9175a3134a29fc1c49007bec80c2761ff4fd3e9ff21a8",
+      "bytes": 30327,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "file": "normal_traces.parquet",
+      "sha256": "2c13d9fb8898213f600c473e14d9bd109a560ebd68c339b59ca4d96a270b2b88",
+      "bytes": 498584,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "abnormal_logs.parquet",
+      "sha256": "820e7cb062d0c0a4dab80f5b8014c5488087412880ea658d7858d260bc862f52",
+      "bytes": 169644,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "8bc9aea7813e0cc34ce785b05d1abef04798ac429a54657d592dbdc04b4f93a4",
+      "bytes": 44890,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "1fad660cefab4cc207517cf7b7476b54ca7ac998c469717aa459a817138aabca",
+      "bytes": 11148,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "9b30306b5a8d1e09aa7355ac428ade7ab608e1302586150910daadee316eb1cf",
+      "bytes": 28184,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "abnormal_traces.parquet",
+      "sha256": "50ea295c938c4839111d912a2f7e1d429d36787bd1f70d950acba14b21f12442",
+      "bytes": 550477,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "conclusion.parquet",
+      "sha256": "4bbdccdb7087de8b439c2f97b97b1da773f5339cdbd31eade8d0f5351162d2f0",
+      "bytes": 5655,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "env.json",
+      "sha256": "9ee828b55531000943e4a35c74e57406229dfba77eb9e0a9a571954113494256",
+      "bytes": 188,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "injection.json",
+      "sha256": "c3babe82a214580e1921890ef0122952c46002ab5d75520a50b26384d79d09be",
+      "bytes": 1247,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "normal_logs.parquet",
+      "sha256": "e2fa63813cd92e5e3bd1b5e63a088036e66f1e5528766527501c39130c945d52",
+      "bytes": 186064,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "normal_metrics.parquet",
+      "sha256": "93b7dfaddf26224d87bdec4ab3b29d103f1e2dd083077c7d1cd53508e0957552",
+      "bytes": 42286,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "b0961dfb26f3c13f61f2571b349f913a86094d82d24a57c55925aa86cd702bc5",
+      "bytes": 10606,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "837ff0b68574eb5759dfacd99bc54206bdec2b2a7c54054efaf3f01b01396e2c",
+      "bytes": 31215,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "file": "normal_traces.parquet",
+      "sha256": "f17e652db290783461e327a02007c95a81015ec2db229519ed6f2c7f6a0a4380",
+      "bytes": 241885,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "abnormal_logs.parquet",
+      "sha256": "e45f38c6ad434ca0b07bfb2e34466169ac44c24792f4ee9abe5e9b22ece7b911",
+      "bytes": 13422,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "0e926946402c45b5957bcac0ae71378bdc0e807a76943d5f1b484b011f529845",
+      "bytes": 33872,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "33cbfc84570c1666333ff95aabb43cbf6b59fcf8814f98b1787f1e4917223313",
+      "bytes": 9270,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "d9ce13bcd4f96816223c48b4fa4d21dff4a759413fa05bb5c9380f0442582a1e",
+      "bytes": 24111,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "abnormal_traces.parquet",
+      "sha256": "b3cc2f9b1e7af88ae5ab43141e698e88a928af3ca104013b2c4c34b9e0909e57",
+      "bytes": 263236,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "conclusion.parquet",
+      "sha256": "951fafe5258af919fef9e06633b634b46ee960d2da5e2d778e4b2ee3d832a123",
+      "bytes": 5411,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "env.json",
+      "sha256": "af841846490212fd471aa1dc7ead98f14f8e8b4913ffc58f6beaf44358b45961",
+      "bytes": 188,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "injection.json",
+      "sha256": "063884a6fcaa4ba77d0dbc06c16e239d2bdfcfcaa67a67f9d30db9df165ee23e",
+      "bytes": 1219,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "normal_logs.parquet",
+      "sha256": "9e88f030ec80b0d08d80d0405b2e873582fea058014fae78d91873cf82b507e6",
+      "bytes": 9953,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "normal_metrics.parquet",
+      "sha256": "f5fc19c049da27f8c75701fab7db42fc9eb21505f0b8ed3c7eabb5b0b85b752d",
+      "bytes": 47002,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "ed6849359b2d7849e55089d22489001c1400a9c2dec6d87575a9c2ecee11ca80",
+      "bytes": 10093,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "30c08f5da0a7d7e0865dd078decb9209ebf4737a4f0c82cdb0fb4d5e74105b43",
+      "bytes": 26694,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "file": "normal_traces.parquet",
+      "sha256": "7830ccd1bd403e9fc816847739f31917fba6aa885711f5e8ffb9bcf761b9f9d6",
+      "bytes": 769498,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "abnormal_logs.parquet",
+      "sha256": "c2bf2d23ee595a2af15cbfb2ae2c30903c44b583f4b4edde07d2148d9428fa26",
+      "bytes": 42423,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "bfaaafa89897d90e5798d800151a356037481aa3b53fbb5906ca13b1054d1be6",
+      "bytes": 49114,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "ba79ee9316e43b2ff348cf8e0cab9446cd37b7d8c49ed8b62958eb0d8f386c82",
+      "bytes": 26737,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "3a013547c6e82b7d861d198550c6582a3ceaeeaff6f9783193b3ff3bebfc0cf6",
+      "bytes": 68843,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "abnormal_traces.parquet",
+      "sha256": "5a836a68090f0582ec9929df43c4d3357da1942cef6abddbedad31132c0b8766",
+      "bytes": 102991,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "conclusion.parquet",
+      "sha256": "dea807cefae9625330b1c59241623070c95821bdae3a96b064c7a1fa7f361c16",
+      "bytes": 4145,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "env.json",
+      "sha256": "2b33a4968c7ce172a2a43d4114b11b3f6bc1075f0cbdf9133368f8e437d2a60f",
+      "bytes": 196,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "injection.json",
+      "sha256": "b8c4673469dc18a45fe1de5e29c527b42f711ef721fae0153ff8c526dba3c292",
+      "bytes": 1294,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "normal_logs.parquet",
+      "sha256": "6dfff7eb35c68d4051afd1fd0ab76c40124852cd560bd425bddda561a6f055e5",
+      "bytes": 50068,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "normal_metrics.parquet",
+      "sha256": "4676cb384b4ccf973fd7263bf0faba2ffea8eb0e99c7280031dad0b479f7acbf",
+      "bytes": 49621,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "f672640f3ff0fe1e477c2811a59d1013bfb52dd0e9fc92cbe6b522f1548c266e",
+      "bytes": 31783,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "890fe28e9d806aedccdab08cce06e71e91ca851579e46b0007794c573b7c83c4",
+      "bytes": 55271,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "file": "normal_traces.parquet",
+      "sha256": "cca057152ebd8ebdc5267145b3a3c116bcf2df882fbab28618289b6119d4cedb",
+      "bytes": 133971,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "abnormal_logs.parquet",
+      "sha256": "2892d41a82d092124086d4f777fa1048df59582cc342ff295312fcfaf2ac15eb",
+      "bytes": 89984,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "ad2f4502c40e7b908a270e568fccafeecd193f95b05ee0b60a4e8091316f97fc",
+      "bytes": 48372,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "dee5e65b0a9d764151925f378acafa5771f9c4ac552d3c960578edd440cfb5f2",
+      "bytes": 9800,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "3f7b421493f9d80b293313038db30ca0c769673cd5f6ea1cdf4b8ca5db92db84",
+      "bytes": 31089,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "abnormal_traces.parquet",
+      "sha256": "c1901eeaafdfe33f9af40f7f05084a7b9cb52cbb8dc754dedb68c4d5cd1558ff",
+      "bytes": 60664,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "conclusion.parquet",
+      "sha256": "7de616c62c61c3a4fcb9210fb9f18cafc0418111812494a89a16db5a6a48a40d",
+      "bytes": 9193,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "env.json",
+      "sha256": "622f46f289fadc07230ca5efe87f6ee8ac66bc39b00c70fab6c88d10db76a5c1",
+      "bytes": 188,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "injection.json",
+      "sha256": "2f1c0bf2b7fc3afc2a02c6f94549929b4748ef9d6083989d8e211406286090c5",
+      "bytes": 1707,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "normal_logs.parquet",
+      "sha256": "c3fc0e86f744aba95be3c4041dd537cfbf340a75b358ade34f681f0a857abdbb",
+      "bytes": 12090,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "normal_metrics.parquet",
+      "sha256": "ee9b5446070d027df6d0f7b23c849a01b2592773fdcee0a0247e6f654c6b82b1",
+      "bytes": 39610,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "0fc634d60fbf65e48e7ef85f96ec560f20589fb576cc9093e43123cd6c4ed880",
+      "bytes": 10361,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "f512ae6f52da9f15c448d7974bfe79b30bf8f0bdfe2468159570cf963dd72348",
+      "bytes": 27516,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "file": "normal_traces.parquet",
+      "sha256": "cc76a268d4496722ad9bdfd45b513de51c9eca8e1cbc5e9c27d7d24b0e0698b5",
+      "bytes": 758162,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "abnormal_logs.parquet",
+      "sha256": "a693086e6b4382da97c28741fb37601e3ebf22e4f2b2e22443fd50b2ed9217b3",
+      "bytes": 31519,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "09c4b6b1cdcc4bf2c5da99644a2eb27e9884411ba96d4bef296f725e132e5bb7",
+      "bytes": 40483,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "e32a3325b88d628f12472184cf17685c87472cb6d565952def421ff47dda2412",
+      "bytes": 6735,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "84b62013259196e0f2565fb0ad12a36288dd557c97b3f4dfd5adf9e1a97c36e0",
+      "bytes": 30397,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "abnormal_traces.parquet",
+      "sha256": "8a62d1eaef3e2e942de7aa083a67e783260accb38f886cabe7204237ef3ae411",
+      "bytes": 80731,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "conclusion.parquet",
+      "sha256": "7968099b94857a643a9cafd8d0da4279fc847f3459a53bbcbfbaea600edac873",
+      "bytes": 9105,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "env.json",
+      "sha256": "7f8c763eafe15838ec3ce13d4aef6b1bccb21ab89367833d99a391fce19f7b67",
+      "bytes": 189,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "injection.json",
+      "sha256": "f91d0901848c1a00075eeab89e435b545f7a3f55341018e53d757befcfc064d9",
+      "bytes": 1709,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "normal_logs.parquet",
+      "sha256": "cb9e5bb59b40282d656faba974420800bc029cbd5d8649813adf104fff38c64a",
+      "bytes": 238813,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "normal_metrics.parquet",
+      "sha256": "3c83fac8b6558e0328375934d9612bdc5248b02b81e16780d9961bca031fe860",
+      "bytes": 48073,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "1047b799b49d4ba9d745ca42cb7bb244e3521a8422bd811e02550fad6e3de3ff",
+      "bytes": 7772,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "6c21d44ae9e860d4b7f84fec49052af84dae3dfa7b38cb37b19247b8d037bc48",
+      "bytes": 31020,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "file": "normal_traces.parquet",
+      "sha256": "b4830b5bbf4e3e628139f088689f862994e3a29b6d0a4f8f5428efcebadd6c62",
+      "bytes": 383309,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "abnormal_logs.parquet",
+      "sha256": "f44f63cf736317836173b4b5dcb48d3bbf433949615ed9bfbac4173d92dd2405",
+      "bytes": 72428,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "b7095ee3dfd28ae3e2c9a0ee54c1ab3e2565ea7001cd0ef4af3d8bc96eb67f76",
+      "bytes": 53559,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "8abe17d6bf92f3b8cefa0a72e44581d3ffb098c924f6741fbe58bdedbb26edbb",
+      "bytes": 32013,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "6f775e6f22d35211ecb823f449142bb0d0871b61b20f3b8b981461ba9f19f686",
+      "bytes": 94152,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "abnormal_traces.parquet",
+      "sha256": "757e79619d1def0dd4fcf8caccd336ac82416461d32fbc1d49da524dcf4fffaa",
+      "bytes": 155067,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "conclusion.parquet",
+      "sha256": "6ebccf5f284390722c37721c7347abd302faefb80cb5a4043d90b56d2a2d5b58",
+      "bytes": 4145,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "env.json",
+      "sha256": "69a1a79ea8f7cf4f3112a3dad932052868f1bc2a72c62713811223607771cc9c",
+      "bytes": 195,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "injection.json",
+      "sha256": "38c00caf864a3b3e3d46ca0027d7cdd75b4165768b933aee21a0b8111015846d",
+      "bytes": 1727,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "normal_logs.parquet",
+      "sha256": "bec8141665adc4d370471590d072428e95a4ba512cc8eff8d2727605dd0e4b5c",
+      "bytes": 31358,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "normal_metrics.parquet",
+      "sha256": "8b9444ed50043c304fc7eb820d75c2572346bef51917257e1e4d4e82d96d5275",
+      "bytes": 49322,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "8012cd95df7bd37312a8a4c696ba712f7e0b9e8fb7edb56d0f78cd311bfced99",
+      "bytes": 30451,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "e0b5583aadc1ec2aaad7467ad43f9c411d059bca6f37b04edbe4de2ba515bd11",
+      "bytes": 69697,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "file": "normal_traces.parquet",
+      "sha256": "fce705608a96d612fbf45744550c5387ae829bf7da167623d575de66cde5ac09",
+      "bytes": 128605,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "abnormal_logs.parquet",
+      "sha256": "e5eef79687bd44b70918161b9afb866c9b9d2a4a963681b06639105601bfec2c",
+      "bytes": 172629,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "26ea2fc4386e0d7d51b57ff27f190f16a4565c1f759853630d1d1de0df220b7b",
+      "bytes": 45916,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "76162e160c9334be4bd18668f8aa80bfd90ab76856914545eeca4397d38d8039",
+      "bytes": 11274,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "646b11f2bc26dd7a315e35677c60de8b1bf9e32cc27f20c6c71a0e59c0a866bb",
+      "bytes": 27193,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "abnormal_traces.parquet",
+      "sha256": "d8f962c00510c5f1f0931f7f513e775c81c9ac1b743c1775f25ef2519439290d",
+      "bytes": 237621,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "conclusion.parquet",
+      "sha256": "b33558b9abc15d5ece9d655a425283118284822140181a626238f98b56ad0761",
+      "bytes": 4676,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "env.json",
+      "sha256": "cc23966461a7121e27925a588abd049e9d0f257e86a29f3e563bb6486d73c231",
+      "bytes": 189,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "injection.json",
+      "sha256": "c12c7a4130000d6229f6dc650b9f9d4282f1b9b6eac132f72a72edfc86d2de8c",
+      "bytes": 1473,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "normal_logs.parquet",
+      "sha256": "5679fe3576d726dace34300468842aea51b7b61ec41186f4d71c07715521fe43",
+      "bytes": 173929,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "normal_metrics.parquet",
+      "sha256": "a8c4d0b059c592c2937e9118811e5cde4e21c3d2b20ed6f7d916445ae26d2c93",
+      "bytes": 40740,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "9220dee4fcd23d14d952a8389a276d489f17b12f3cd8ee8011b0f77c19dda23c",
+      "bytes": 10747,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "0dd66a19f65346affefe40cb7a12b7c2873afc689eb79fc1f7faf38031f9094e",
+      "bytes": 28880,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "file": "normal_traces.parquet",
+      "sha256": "1a6d51a33d27077c66e7bf01dc5ecb40b1a4d138425f262731ede443a9611903",
+      "bytes": 680488,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "abnormal_logs.parquet",
+      "sha256": "473717a36e6a2d55c36bdd9a46f794fb1f11e6b96e577280dd77abb0b8cbe726",
+      "bytes": 580874,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "b3a3da7ad427f9640379e9f0ea6009698b6ed5a298b5a5f0a71758e5950e2bbd",
+      "bytes": 45391,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "db06e7896bbe358aeda6029c12366b33011f88e6bc685a1e01c598ceeef2eabc",
+      "bytes": 13128,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "025b053f4a7f1b45ece1eb929ab46b8a18c53599446ed01f38f181e928042ede",
+      "bytes": 27644,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "abnormal_traces.parquet",
+      "sha256": "53ab46968ff1b2f44a7f824b65f9691653916b7fe9dffcbdf18d33c792ae351c",
+      "bytes": 246278,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "conclusion.parquet",
+      "sha256": "bd8e36721b109b5a5262eb923cc507c553f0d5299c696a2a50248e207b464357",
+      "bytes": 4677,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "env.json",
+      "sha256": "606960497c80f9fd8dafb4be83533ce1d23541e0dc6c3a475ca149bd786ce1c9",
+      "bytes": 189,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "injection.json",
+      "sha256": "28229cedf31c3ad0782f31073e9aef2b6d0c1e1dcf69428e68551f265b65dcf6",
+      "bytes": 1504,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "normal_logs.parquet",
+      "sha256": "074bfaa2039bcd7d11c38bfd30f01cf18f2c1c0e6c47623a57dbff36372f917a",
+      "bytes": 21276,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "normal_metrics.parquet",
+      "sha256": "b5458d185061b904dc23e3fd658ebbb7a7296d98124dfd960d4a269b99b87f00",
+      "bytes": 48763,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "1a8c1520a465e04865a772ec85b552cf1931e7b9c4720f7228803753e1b0f2c5",
+      "bytes": 13266,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "34231ae1ae57c3def352a599cb482bc1416be8743ec1849d4964602ddcb6f8d4",
+      "bytes": 31283,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "file": "normal_traces.parquet",
+      "sha256": "f6944a6c14480ea56e044fc47f7b941face1b3a17ccf157a7d7fd9e923b5fdc2",
+      "bytes": 245188,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "abnormal_logs.parquet",
+      "sha256": "c3272106d15c0eb0648b7da6d03021609ef29d2a79bac04a03825229e069adf6",
+      "bytes": 180838,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "abnormal_metrics.parquet",
+      "sha256": "e4e6df74f84d9b555da75e7f8c4b7996313f7034bc022371157d8dca6c895458",
+      "bytes": 46133,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "abnormal_metrics_histogram.parquet",
+      "sha256": "ceb99a29c01d96026390f2adfb7533fc1199b703c11f81cf03f73376631e7943",
+      "bytes": 12130,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "abnormal_metrics_sum.parquet",
+      "sha256": "0ad9856d240c98f9091414f29bc0da335e974d3b001b394fea291f11119f8749",
+      "bytes": 31577,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "abnormal_traces.parquet",
+      "sha256": "5152c237c6e622f0b619b1f80db1911ce9fce4473c1b048fb64f5a17978f63d0",
+      "bytes": 543214,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "conclusion.parquet",
+      "sha256": "fea59655dcac197362dd25c0f9c1646d995522c1006d479b360a8a96363aae6e",
+      "bytes": 4681,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "env.json",
+      "sha256": "a61a8b660e3385b191223448843c9ff3dddc0ebdfff505e8ad12011be04e3967",
+      "bytes": 189,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "injection.json",
+      "sha256": "8d17ea6326f42af453d1bd05368ab5df9b198c46279397f7e6db5472c40d639c",
+      "bytes": 1504,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "normal_logs.parquet",
+      "sha256": "8be74405a8cb9ab91eec30360e187addbfe281359535595e91bb439553fd9f59",
+      "bytes": 177496,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "normal_metrics.parquet",
+      "sha256": "fc4ff02c325428733f4cf0773d25746fe7d8c503c597c2432cb9b0c71731c164",
+      "bytes": 46549,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "normal_metrics_histogram.parquet",
+      "sha256": "e192e97b6c7c61d7739294655d7fb30838fbc6f7207fdd42b812b1efc15c8cb2",
+      "bytes": 11794,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "normal_metrics_sum.parquet",
+      "sha256": "e59585bdeea9491c557e6801d3eedb70961b79aea6c1991e9910cbd379ff4fe4",
+      "bytes": 31670,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "file": "normal_traces.parquet",
+      "sha256": "5940913adc8441d37a6c6aafd3ed02154be37325d9e87acd44e37c133b3436b2",
+      "bytes": 539081,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-011",
+      "file": "alerts.parquet",
+      "sha256": "ec22fa40dc1c54efda4e0a55b028ec0f52b3e6ee42359adb1f60b9b29e2c6b1c",
+      "bytes": 25855,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-011",
+      "file": "events.parquet",
+      "sha256": "86175467a5fcf019c675f7d8619745f662e966e69846d2256fc4a32670af348f",
+      "bytes": 17672,
+      "status": "verified_cache"
+    },
+    {
+      "case_id": "semantic-rca-transfer-011",
+      "file": "logs.parquet",
+      "sha256": "7256a21f14112099f9e6b819cc8722e4631d4bec2f351337d48ad5143e6e7dd3",
+      "bytes": 9070799,
+      "status": "verified_cache"
+    },
+    {
+      "case_id": "semantic-rca-transfer-011",
+      "file": "metrics.parquet",
+      "sha256": "2d161591c9f9498e1c27428044728667c0ff652b38a6cb709480dfcf31b7bdee",
+      "bytes": 359342,
+      "status": "verified_cache"
+    },
+    {
+      "case_id": "semantic-rca-transfer-011",
+      "file": "task.json",
+      "sha256": "90a4363dea51d8114db566b35ca700480ac28b57ea83d91f77b339ff43a69814",
+      "bytes": 1325,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-011",
+      "file": "topology.json",
+      "sha256": "37cab9fb9e65d196405e1f4107b345a2712853706e2fddf532a0a12fa1de2fbb",
+      "bytes": 179908,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-011",
+      "file": "traces.parquet",
+      "sha256": "00a23f5cebeb33d3b62f9a834bc428e16801e75606841b693f43b15f07c33471",
+      "bytes": 26256545,
+      "status": "verified_cache"
+    },
+    {
+      "case_id": "semantic-rca-transfer-012",
+      "file": "alerts.parquet",
+      "sha256": "462c6b675884f873725d97b51d99f1faccb6f13bb3266e17548207b943dbc0c7",
+      "bytes": 26120,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-012",
+      "file": "events.parquet",
+      "sha256": "8ab1f5a84343449898092844ab2dcd57fac942265de9c62a9f13e3adea1ea2af",
+      "bytes": 23080,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-012",
+      "file": "logs.parquet",
+      "sha256": "850a6ab55da224893e438d92cfbc31811f37125202000ab454cf2bffbabbfa11",
+      "bytes": 9553215,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-012",
+      "file": "metrics.parquet",
+      "sha256": "6a3eafa8fa5f14a87dd25ac7efe66115ebbb8fe3ba805a156414f6eebf7824c8",
+      "bytes": 338462,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-012",
+      "file": "task.json",
+      "sha256": "55966311467b7237fb5d05cf5b7fe8d2b9eab6d42158d82613a4442423f4754f",
+      "bytes": 1345,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-012",
+      "file": "topology.json",
+      "sha256": "09cf9b097288e9c2da46e9250787eb63ae8a159b168e3df19f980498b5ff0eac",
+      "bytes": 178642,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-012",
+      "file": "traces.parquet",
+      "sha256": "4e79e5f5e9b4b56b4164958b411144a8304528053515ce49295e9f2690129303",
+      "bytes": 20978724,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-013",
+      "file": "alerts.parquet",
+      "sha256": "af6c8faf7bcad6e5260c257d8d86f0e35fb563b2da3cb9dd102c0b13b3960fda",
+      "bytes": 24917,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-013",
+      "file": "events.parquet",
+      "sha256": "5f4d71502c3fb5bbece16f11a8050b571dd5ae0a90eb043e6b0dcb6e60889ae0",
+      "bytes": 17211,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-013",
+      "file": "logs.parquet",
+      "sha256": "312d3a5510b6e0d19050a7ddd00a2df62da722be960b84bb7a502cf1f223fe06",
+      "bytes": 8890396,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-013",
+      "file": "metrics.parquet",
+      "sha256": "c3b14bd25e7b48723a841d457d3dff8cd3cfa6e9c6b4e2177bd33fffdfe74086",
+      "bytes": 351615,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-013",
+      "file": "task.json",
+      "sha256": "941476888acb3695a6f5a895597e755692920ecbd04584f2347a461c336904d8",
+      "bytes": 1375,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-013",
+      "file": "topology.json",
+      "sha256": "4d76228362658da3c6a9988c5400f07d8c4755209547a4dba4b5f415a64570af",
+      "bytes": 177865,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-013",
+      "file": "traces.parquet",
+      "sha256": "9c2c2fc33f28fbdf34414893792692a6fed655c3545e595120d9e2b2dff76910",
+      "bytes": 32023667,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-014",
+      "file": "alerts.parquet",
+      "sha256": "096c9454bcd5ceb5bc390c7bf0c4ca46f360d8d2d1891e6c54a90b49673af1f2",
+      "bytes": 24915,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-014",
+      "file": "events.parquet",
+      "sha256": "666f3b390f3db8d0d546fff1b31daf7cfc84b33c986ca89aef0fa7fe7a3f00d6",
+      "bytes": 23006,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-014",
+      "file": "logs.parquet",
+      "sha256": "fcc44783dca41f52404b34cd3a294af08775744b4db0404112646afbcb8cacb0",
+      "bytes": 5053467,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-014",
+      "file": "metrics.parquet",
+      "sha256": "e70334551c0c5dc43567e04c6ed0582a8be087f522919f851a9e4d24b1acf3cf",
+      "bytes": 326505,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-014",
+      "file": "task.json",
+      "sha256": "0d630e127f12386e51e90101fff56d50445746d62f907b0ecf27a01f9113e356",
+      "bytes": 1420,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-014",
+      "file": "topology.json",
+      "sha256": "0472ff2e4441ce389410e464cf1623c998c0f810c2fafc705f065f71001ebcb3",
+      "bytes": 175741,
+      "status": "verified_download"
+    },
+    {
+      "case_id": "semantic-rca-transfer-014",
+      "file": "traces.parquet",
+      "sha256": "24b2263a0be8c3952c9fe45ec19d4b6d11e2ea480d81e079975738870a903124",
+      "bytes": 20467091,
+      "status": "verified_download"
+    }
+  ],
+  "errors": []
+}

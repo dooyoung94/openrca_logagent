@@ -1,0 +1,31 @@
+{
+  "archive_name": "4. apps_ito_agent_master_v2_1_action_guide_policy.zip",
+  "archive_sha256": "7e3129ab6eccdf2d2d4a5e7149255344314876afd5ec09310997327f72ee9a3f",
+  "reference_modules": [
+    {
+      "path": "apps_ito/agents/log_agent_v2/1_RCA/thread_scoring.py",
+      "sha256": "94bbb6637082e7d60f3264739981d56208e037d4607bed23570181e470ad370a"
+    },
+    {
+      "path": "apps_ito/agents/log_agent_v2/1_RCA/time_contract.py",
+      "sha256": "b55e65b8ab7b8e1260e6a0629e0abea858df618ed9638bc1da0fba33bb24301a"
+    },
+    {
+      "path": "apps_ito/agents/log_agent_v2/1_RCA/stage_04_threads.py",
+      "sha256": "311bdde514674690deb4edc4d00924ec0ce81b125d3c5ac7b09df38924b52ec2"
+    },
+    {
+      "path": "apps_ito/agents/log_agent_v2/1_RCA/pipeline.py",
+      "sha256": "a75e81eecddb1c96b62372b60e0d82e95c9b9d636b3303d630696201c9f60844"
+    },
+    {
+      "path": "apps_ito/agents/log_agent_v2/1_RCA/resources/hypothesis.yaml",
+      "sha256": "49f02f2b9786cd3be69239378626e665960e27daae52b674d29ca4a6b85dab07"
+    },
+    {
+      "path": "apps_ito/agents/log_agent_v2/1_RCA/resources/policy.yaml",
+      "sha256": "11b3fa7158f3f0de056bdaad43c5a4d8e39ee6183eed42c680eef9700aff8ba0"
+    }
+  ],
+  "reuse": "architecture only; no production code, endpoints, credentials or thresholds redistributed"
+}

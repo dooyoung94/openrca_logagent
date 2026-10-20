@@ -1,0 +1,44 @@
+schema_version: 1
+version: openrca-architecture-port-v1
+minimum_baseline_samples: 2
+minimum_abnormal_samples: 2
+time_segments: 4
+temporal_tolerance_seconds: 30
+report_top_n: 1
+thresholds:
+  cpu_core_floor: 0.5
+  cpu_core_delta: 0.25
+  cpu_growth_ratio: 2.0
+  utilization_percent_floor: 80.0
+  utilization_delta_percentage_points: 20.0
+  memory_bytes_floor: 536870912
+  memory_bytes_delta: 134217728
+  memory_growth_ratio: 1.5
+  restart_counter_delta: 1.0
+  call_path_gap_ms: 500.0
+  call_path_gap_delta_ms: 400.0
+  symptom_latency_ratio: 2.0
+  symptom_latency_delta_ms: 100.0
+  event_rate_ratio: 2.0
+scoring:
+  direct_mechanism: 60.0
+  baseline_contrast: 20.0
+  temporal_ontology_connection: 12.0
+  independent_signal: 8.0
+# Metric names describe telemetry semantics, never case IDs or answer labels.
+metrics:
+  cpu_cores: [container.cpu.usage, k8s.pod.cpu.usage]
+  cpu_percent: [node_cpu_usage_rate]
+  memory_bytes: [container.memory.working_set, container.memory.usage, container.memory.rss,
+                 k8s.pod.memory.working_set, k8s.pod.memory.usage, k8s.pod.memory.rss]
+  memory_percent: [node_memory_usage_rate]
+  restarts: [k8s.container.restarts]
+  unavailable_when_zero: [node_ready_status, k8s.container.ready]
+  unavailable_when_one: [node_not_ready_status]
+  disk_io_regex: '(?i)(disk.*(?:io.*util|await|latency)|io_wait|iowait)'
+events:
+  memory_pressure: '(?i)(oom.?kill|out of memory|memory pressure)'
+  disk_io_degradation: '(?i)(disk.*(?:i/o|io|latency|timeout)|i/o (?:error|timeout)|blocked for more than)'
+  host_unavailable: '(?i)(NodeNotReady|NodeStatusUnknown|node.{0,40}(?:not.?ready|unreachable))'
+  configuration_error: '(?i)(executable file not found|exec:.{0,100}not found|unknown command|failed to start container)'
+exclude_event_regex: '(?i)(chaos-mesh|chaosblade|litmuschaos|fault.?inject|stress-ng)'

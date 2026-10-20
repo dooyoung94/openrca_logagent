@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "implementation": "OpenRCA adaptation of LogAgent architecture",
+  "frozen_at": "2026-10-20T08:28:40.785778+00:00",
+  "benchmark_revision": "fdfbca65c87c36c6b06bddfa6d611544f13bfa34",
+  "files_sha256": {
+    "src/logagent_bench/__init__.py": "32ef06936324e926cca0645e7450dbefc0ded6ef11733021b10d6d52c9ec0c26",
+    "src/logagent_bench/adapter.py": "4636dab5ef4b6421d32b7afce0d4bedd179ced6ebdf6f432878e89b6585a1296",
+    "src/logagent_bench/cli.py": "00918484c343ebbad1d550633423a99a6f312892467aca917b9c6a12db29b4bb",
+    "src/logagent_bench/datasets.py": "f2bf0868d8a8e19befcca7179219cb0032c09936dd371282e3e39b9e8d20dd41",
+    "src/logagent_bench/engine.py": "099f8d240237a61037eb1e70c361f1e3c448cfcb3abd6c54b920fac0fd2547b8",
+    "src/logagent_bench/runner.py": "f1d20dfd016c1f471c40686f5aa35d533123705d19ba139cfe96c426c9fec8ce",
+    "src/logagent_bench/scoring.py": "54f9e44cc427dfbab85f4f039f6d06e6469e82f298ce9241504ada0a29b3f965",
+    "src/logagent_bench/worker.py": "bb70873e47e712f55d25a1afd5fcb3a7c32e472e363ea39ea12b6098acefdbf5",
+    "configs/hypothesis.yaml": "f00ba92235a99348339e127ec28f2ceb152d2b12d06e07452385b135a248e519"
+  },
+  "protocol_sha256": "1b0daa5ece77e915a3ac579e73b65c807394efc5fa16805e6169ebfeb37a62bd",
+  "label_access": "inference subprocess blocks fixture/metadata reads",
+  "post_score_tuning": false,
+  "llm_used": false,
+  "adaptations": [
+    "dataset-provided baseline/incident windows",
+    "equal chronological T1-T4 segments",
+    "telemetry-derived call/hosting ontology",
+    "OpenRCA physical-mechanism hypotheses",
+    "no synthetic Jennifer SQL profiles",
+    "Top-1 evidence-scored Thread"
+  ],
+  "metric": "strict structured diagnosis agreement; not the upstream Capability index",
+  "denominator": "all selected cases; abstentions and runner failures count as incorrect"
+}

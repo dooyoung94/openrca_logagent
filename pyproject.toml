@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "logagent-openrca-benchmark"
+version = "0.1.0"
+description = "Frozen LogAgent v2 RCA evaluation on the Agent RCA Bench v34 cohort"
+requires-python = ">=3.11"
+dependencies = ["PyYAML>=6,<7", "pyarrow>=18", "sqlglot==30.22.0", "requests>=2.32,<3", "tqdm>=4.67,<5"]
+
+[project.scripts]
+logagent-bench = "logagent_bench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
