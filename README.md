@@ -1,10 +1,18 @@
 # LogAgent × OpenRCA Benchmark
 
-첨부 LogAgent v2의 **관측 정규화 → 시간·온톨로지 연결 → 가설 평가 → 후보 Thread → 점수화 → Top-1** 구조를 OpenRCA 데이터에 맞게 구현한 평가 프로젝트입니다.
+첨부 LogAgent v2의 **관측 정규화 → 시간·온톨로지 연결 → 가설 평가 → 후보 Thread → 점수화** 구조를 OpenRCA 데이터에 맞게 구현한 평가 프로젝트입니다.
 
-운영 코드 전체나 Jennifer 전용 임계치를 복사하지 않습니다. 원래 ZIP의 해시와 설계 참조 모듈은 `provenance/architecture_source.json`에 기록합니다. 운영 DB, Neo4j 서버, Jennifer API, LLM API 키가 필요하지 않습니다.
+운영 코드 전체나 Jennifer 전용 임계치를 복사하지 않습니다. 원래 ZIP의 해시와 설계 참조 모듈은 `provenance/architecture_source.json`에 기록합니다. Python 단독 실행에는 운영 DB, Neo4j 서버, Jennifer API, LLM API 키가 필요하지 않습니다.
 
-## 실제 Hugging Face LLM 결과
+## 현재 LLM 연결 방식
+
+**LogAgent가 상위 5개 후보 선별 → 원저장소 LLM이 SQL·PromQL로 반복 조사 → 원래 `submit_diagnosis`로 최종 제출 → 원래 채점기** 순서입니다. 후보는 첫 모델 호출 전에 제공하며, 후보가 틀리거나 없으면 LLM이 다른 원인도 조사합니다. Python의 Top-1을 LLM의 최종 답으로 고정하지 않습니다.
+
+원저장소와 같은 모델 설정·system prompt·Raw 도구·48회 도구 한도·58턴·16,384 출력 상한·진단 및 인용 검증을 사용합니다. LogAgent 조건에는 원래 incident prompt 뒤에 후보 문맥이 추가되므로 **전체 입력이 동일하다고 주장하지 않습니다**. 선별 시간은 전체 소요 시간에 포함하고 별도로 기록합니다. [원저장소 처리 방식과 변경 내역](docs/UPSTREAM_PIPELINE_KO.md)을 확인하십시오.
+
+새 연결 방식 `logagent-matched-llm-v2`의 실제 모델 실행은 **0회**, 정답률은 **미측정**입니다. API 키·고정 GreptimeDB release build·Docker·가격 스냅샷이 필요합니다. 아래 HF 결과는 이전의 요약문 단일 응답 실험이며 새 방식의 점수가 아닙니다.
+
+## 이전 Hugging Face 요약문 실험 결과
 
 공개 **Qwen3-1.7B Q8** 가중치로 같은 14개 사례를 2조건·2반복, 총 **56회 실제 추론**했습니다. 아래 분모는 모델 실행 수입니다.
 
@@ -33,7 +41,7 @@
 ## 논문용 LLM 비교
 
 - [원저장소 모델별 OpenRCA2·RCA100 정답률](docs/BASELINE_RESULTS.md): 원본 공개 JSON에서 계산한 Split·Raw·Graph의 과거 측정치.
-- [LLM 실험 조건·멀티 답변 처리·실행 방법](docs/PAPER_PROTOCOL.md): 같은 6개 모델·동일 prompt·48회 도구·58턴·16,384 출력 상한·같은 공식 scorer에 LogAgent 도구 arm을 추가합니다.
+- [LLM 실험 조건·멀티 답변 처리·실행 방법](docs/PAPER_PROTOCOL.md): 같은 6개 모델·원래 조사 지침·48회 도구·58턴·16,384 출력 상한·같은 공식 scorer에 LogAgent 후보 선별 조건을 추가합니다. LogAgent 입력에는 후보 문맥이 더해집니다.
 - 원래 6개 모델 실험은 14사례 × 6모델 × 4조건 × 2회 = **672개 cell** 계획입니다. 이 6개 모델 설정의 실제 호출은 **0회**입니다. API 키·고정 GreptimeDB build·Docker·가격 스냅샷이 없어 실행 전 점검에서 중단됐습니다.
 - 별도로 [Hugging Face 로컬 LLM 실험](docs/HF_LOCAL_KO.md)을 완료했습니다. 공개 Qwen3-1.7B Q8 가중치를 실제로 내려받아 사용했으며, 같은 14개 사례의 관측 요약 조건과 LogAgent 후보 추가 조건을 비교했습니다. 원래 Qwen API 모델이나 6개 모델 합산 실험과는 별개입니다.
 - 원래의 허용 대체 정답과 별칭은 보존하고, 여러 후보를 내놓았다는 이유로 Top-1을 정답 처리하지 않습니다.
@@ -88,7 +96,7 @@ Windows PowerShell에서는 활성화 명령을 `.venv\Scripts\Activate.ps1`로 
 
 `causal_scope`, 실제 원인 위치(컴포넌트·방향 있는 호출 간선·노드), `fault_category`, `mechanism_code`가 모두 맞아야 정답입니다. 근거 부족에 따른 기권과 실행 실패도 전체 분모에 포함합니다. 위치 정답률과 장애 유형 정답률은 별도 집계합니다.
 
-상위 후보의 Thread 점수는 근거 지지 점수이며 정답 확률이 아닙니다. 공개 보고서의 Capability 점수, 유료 LLM 도구 루프, SQL 인용 검증기는 재현하지 않으므로 그 점수와 직접 비교하지 않습니다.
+상위 후보의 Thread 점수는 근거 지지 점수이며 정답 확률이 아닙니다. 위 Python 단독 결과는 공개 보고서의 Capability 점수나 유료 LLM 도구 루프의 결과가 아니므로 그 점수와 직접 비교하지 않습니다. 현재 LLM 연결 방식은 원래 도구 루프와 SQL 인용 검증기를 재사용하지만 실제 모델 실행 전입니다.
 
 ## 정답 유출 방지
 
@@ -108,6 +116,8 @@ Windows PowerShell에서는 활성화 명령을 `.venv\Scripts\Activate.ps1`로 
 | `src/logagent_bench/engine.py` | 가설·온톨로지·T1~T4·Thread·Top-1 |
 | `configs/hypothesis.yaml` | 지표 의미·임계치·가중치 |
 | `src/logagent_bench/worker.py` | 사례별 분석과 정답 파일 접근 차단 |
+| `src/logagent_bench/candidates.py` | 격리된 분석 프로세스에서 상위 5개 후보 선별 |
+| `src/logagent_bench/upstream_bridge.py` | 후보 전달 후 원래 LLM 도구 루프·진단 제출 |
 | `src/logagent_bench/scoring.py` | 분석 종료 후 구조화 정답 비교 |
 | `src/logagent_bench/runner.py` | 코드 고정·반복 실행·실패 보존·결과 생성 |
 | `results/v1/` | 실제 측정 결과와 프로토콜·다운로드 검증 |

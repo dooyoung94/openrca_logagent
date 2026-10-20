@@ -1,5 +1,7 @@
 # 원본 구조와 OpenRCA 구현의 대응
 
+아래 표는 기존 **Python 단독 측정**의 대응입니다. 현재 LLM 비교 경로는 **LogAgent 상위 5개 후보 선별 → 원저장소 LLM의 도구 조사·최종 판단**으로 역할을 나눕니다. Python의 Top-1을 확정 답으로 넘기지 않으며, [원저장소 방식과의 대응](UPSTREAM_PIPELINE_KO.md)에 별도로 기록합니다.
+
 | 원본 설계 | 보존한 역할 | OpenRCA에 맞춘 변경 |
 |---|---|---|
 | 수집 PostgreSQL/Jennifer 입력 | 실제 관측만 분석 | 고정 버전 Parquet 직접 읽기 |

@@ -10,7 +10,8 @@ from unittest.mock import patch
 from logagent_bench.datasets import ROOT, cohort
 from logagent_bench.experiment import make_plan
 from logagent_bench.paired_stats import case_pair_effect, holm, compare_report
-from logagent_bench.upstream_bridge import thread_session, THREAD_TOOL, run_logagent_agent
+from logagent_bench.candidates import select_candidates
+from logagent_bench.upstream_bridge import CANDIDATE_NOTE, candidate_prompt, run_logagent_agent
 
 SDK = importlib.util.find_spec("agent_rca_bench") is not None
 
@@ -50,15 +51,6 @@ class PlanTests(unittest.TestCase):
         self.assertEqual(rows['rca100','logagent']['accuracy'],.5)
         self.assertIsNone(rows['openrca2','logagent']['accuracy'])
 
-    def test_session_restored_after_error(self):
-        original = type("Original", (), {})
-        module = types.SimpleNamespace(InvestigationSession=original)
-        with self.assertRaises(RuntimeError):
-            with thread_session(module, lambda: {}, {}):
-                self.assertIsNot(module.InvestigationSession, original)
-                raise RuntimeError("injected transport failure")
-        self.assertIs(module.InvestigationSession, original)
-
     def test_repetitions_do_not_inflate_case_sample(self):
         result = case_pair_effect({"a":[0,0],"b":[1,1]}, {"a":[1,1],"b":[1,1]})
         self.assertEqual(result["independent_cases"], 2)
@@ -74,7 +66,7 @@ class PlanTests(unittest.TestCase):
 
 @unittest.skipUnless(SDK, "Install .[llm] to test the pinned upstream contract")
 class UpstreamTests(unittest.TestCase):
-    def test_system_and_incident_prompts_identical(self):
+    def test_original_contract_preserved_with_candidate_context_only(self):
         import agent_rca_bench.agent as a
         from agent_rca_bench.contracts import CaseInput,Visibility,ApiTransport,AgentUsage
         case = CaseInput(case_token="opaque",time_start=0,time_end=100,alert_time=50)
@@ -86,12 +78,17 @@ class UpstreamTests(unittest.TestCase):
             return fake
         settings=dict(model="gpt-5.6-sol",api_transport=ApiTransport.OPENAI_RESPONSES,reasoning_effort="medium",
                       max_tool_calls=48,max_turns=58,max_output_tokens=16384,semantic_coverage=None)
+        shortlist = select_candidates({"threads": []})
+        metrics = {}
         with patch.object(a,"run_structured_api_agent",runner):
             a.run_agent(None,case,Visibility.RAW,**settings)
-            run_logagent_agent(None,case,Visibility.RAW,candidate_loader=lambda:{},metrics={},**settings)
-        for field in ["system_prompt","user_prompt","model","api_transport","reasoning_effort","max_tool_calls","max_turns","max_output_tokens","output_tool"]:
+            run_logagent_agent(None,case,Visibility.RAW,candidate_loader=lambda:shortlist,metrics=metrics,**settings)
+        for field in ["system_prompt","model","api_transport","reasoning_effort","max_tool_calls","max_turns","max_output_tokens","output_tool","investigation_tools","validate_output","prompt_cache"]:
             self.assertEqual(captured[0][field],captured[1][field])
-        self.assertEqual(captured[1]["investigation_tools"],captured[0]["investigation_tools"]+[THREAD_TOOL])
+        self.assertEqual(captured[1]["user_prompt"],candidate_prompt(captured[0]["user_prompt"],shortlist))
+        self.assertEqual(metrics["architecture_preselection_runs"],1)
+        self.assertEqual(metrics["shortlist_candidates"],0)
+        self.assertIn(CANDIDATE_NOTE,captured[1]["user_prompt"])
 
     def test_thread_navigation_is_not_valid_source_evidence(self):
         from agent_rca_bench.contracts import ToolTrace

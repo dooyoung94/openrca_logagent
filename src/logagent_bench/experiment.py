@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .datasets import BENCHMARK_REVISION, ROOT, cohort, digest
+from .candidates import CANDIDATE_LIMIT
 
 ARMS = ("split_pillars", "raw", "semantic_graph", "logagent")
 PROTOCOL_FILES = ("transfer-v34-protocol.json", "transfer-v34-two-model-extension-protocol.json")
@@ -63,21 +64,29 @@ def make_plan(selected_models=None):
             runtime[package] = importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError:
             runtime[package] = None
-    protocol = {"revision": "logagent-matched-llm-v1", "upstream_revision": BENCHMARK_REVISION,
+    protocol = {"revision": "logagent-matched-llm-v2", "upstream_revision": BENCHMARK_REVISION,
                 "models": roster, "arms": list(ARMS), "repetitions": 2, "max_tool_calls": 48,
                 "max_turns": 58, "query_timeout_seconds": 120, "runtime_package_versions": runtime,
                 "provider_default_sampling": True, "no_seed_sent": True,
                 "provider_concurrency": 1, "case_independent_unit": True,
                 "arm_order": "deterministic counterbalanced rotation by case/model/repetition",
-                "new_arm": "raw tools plus one evidence-scored Thread navigation tool",
-                "identical_raw_graph_logagent_system_and_incident_prompts": True,
+                "new_arm": "LogAgent preselects ranked candidates before the unmodified upstream Raw LLM loop",
+                "candidate_limit": CANDIDATE_LIMIT,
+                "candidate_selection": "same frozen Python engine/policy; telemetry-only isolated subprocess; no Top-1 handoff",
+                "candidate_shortlist_policy": "navigation only; LLM may reject or investigate outside the shortlist; empty shortlist does not force abstention",
+                "candidate_timing": "preselection is outside the 48 investigation tool calls; included in pipeline elapsed time and separately recorded",
+                "identical_raw_graph_logagent_system_prompt": True,
+                "identical_raw_logagent_investigation_tools": True,
+                "incident_prompt": "original bytes unchanged as prefix; LogAgent arm appends candidate navigation context only",
+                "same_upstream_runner_output_schema_validation_and_scorer": True,
+                "invalid_final_output_policy": "unchanged upstream in-loop validation feedback within 58 turns; no post-run repairs or retrying scored cells",
                 "primary_comparison": {"baseline": "raw", "treatment": "logagent", "metric": "diagnosis_correct"},
                 "secondary_comparison": {"baseline": "semantic_graph", "treatment": "logagent"},
                 "primary_test": "paired sign test on per-case mean correctness; Holm across selected models",
                 "secondary_efficiency_family": "calls and input tokens; eligible cases only; Holm separately",
                 "missing_and_failed_cells": "included as failures, never silently dropped",
                 "historical_public_scores": "reference only; not matched samples",
-                "policy_status": "frozen port v1; no tuning against LLM outputs",
+                "policy_status": "v2 development protocol after the HF summary pilot; engine and hypothesis policy unchanged; not an unseen-case confirmatory result",
                 "answer_semantics": "unchanged upstream Top-1 scorer; declared identity aliases and alternative mechanisms accepted; alternative_candidates retained but not promoted to correct answers",
                 "files_sha256": binding}
     targets = {dataset: {"cases": sum(c["dataset"] == dataset for c in selected_cases),

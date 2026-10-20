@@ -2,6 +2,8 @@
 
 이 문서는 원래 6개 API 모델의 672회 비교 계획입니다. 별도의 단일 HF 경량 모델 실험 56회는 완료했으며, [실측 결과와 출력 계약 실패](MEASUREMENT_HF_KO.md)에 기록합니다. 두 실험의 모델과 분모를 합치지 않습니다.
 
+현재 protocol은 **`logagent-matched-llm-v2`**입니다. LogAgent가 먼저 후보를 선별한 후 원래 LLM 도구 루프를 실행합니다. 이전 v1의 선택적 `query_rca_threads` 도구는 제거했습니다. v1은 모델 호출 0회였고, 기존 HF 실측 56회는 원래 도구 루프를 사용하지 않은 별도 실험으로 보존합니다. [처리 순서와 원저장소 대비표](UPSTREAM_PIPELINE_KO.md)를 참고하십시오.
+
 원래 6개 모델 실험 상태: **구현·계약 테스트 완료, 해당 모델 설정의 실제 호출 0회**. API 키, 고정 GreptimeDB release build, Docker와 실행 시점 가격 스냅샷이 없어 실행 전 점검에서 중단됩니다. `experiments/environment_check.json`이 실제 점검 결과입니다. 이 6개 모델 재실행의 정확도와 비용은 `null`이며 Python의 90%를 LLM 성능으로 복사하지 않습니다. 별도 HF 실측은 위 링크에서 확인할 수 있습니다.
 
 ## 비교할 네 조건
@@ -11,11 +13,13 @@
 | Split | 원래 `run_split_agent` | Prometheus·Loki·Tempo |
 | Raw | 원래 `run_agent` | GreptimeDB SQL·PromQL |
 | Graph | 원래 `run_agent` | Raw + 원래 Semantic Graph 도구 |
-| LogAgent | 같은 구조화 API runner | Raw + `query_rca_threads` 한 도구 |
+| LogAgent | 후보 선별 후 같은 구조화 API runner | 같은 Raw 도구 + 첫 입력의 상위 5개 후보 문맥 |
 
-주 비교는 같은 모델의 **LogAgent vs Raw**입니다. LogAgent vs Graph는 별도로 보고하고, 과거 공개 결과는 참고값으로만 둡니다. LogAgent 도구는 Python의 T1~T4·실측 ontology·가설·Thread 점수로 후보를 반환합니다. 후보는 탐색 안내이며 인용 근거로 인정하지 않습니다. LLM이 실제 SQL/PromQL 결과를 조회해 최종 원인을 제출해야 합니다. 후보 도구 호출도 전체 48회 한도에 들어가고 Python 분석 시간도 LLM 실행 시간에 포함됩니다.
+주 비교는 같은 모델의 **LogAgent vs Raw**입니다. LogAgent vs Graph는 별도로 보고하고, 과거 공개 결과는 참고값으로만 둡니다. LogAgent는 Python의 T1~T4·실측 ontology·가설·Thread 점수로 먼저 상위 5개 후보를 선별합니다. 기존 engine과 가설 설정은 바꾸지 않았습니다. 선별은 정답 파일 접근을 차단한 별도 프로세스에서 실행하며, 원래 incident prompt 뒤에 후보 문맥을 추가합니다. Python의 `diagnosis`나 `selected_thread`를 확정 답으로 전달하지 않습니다.
 
-이는 원본 LogAgent 운영 코드에서 LLM이 보고서만 작성하던 역할과 다른 **연구용 treatment**입니다. Python 원인 후보를 탐색 도구로 제공하고, 같은 LLM이 근거 조회와 최종 진단을 수행하게 해 인터페이스 차이를 비교합니다.
+후보는 탐색 안내이며 인용 근거로 인정하지 않습니다. LLM은 같은 Raw SQL/PromQL 도구로 검증하고, 후보를 기각하거나 후보 밖의 원인을 조사할 수 있습니다. 후보가 0개여도 원래 조사를 계속합니다. 선별은 첫 모델 호출 전에 실행하므로 조사 도구 48회를 차감하지 않습니다. 대신 Python 선별 시간을 전체 `elapsed_seconds`에 포함하고 `architecture_build_seconds`, 후보 수·해시, LLM 시간도 별도로 기록합니다. 따라서 효율 비교는 추가 전처리 비용까지 포함하는 전체 파이프라인 비교입니다.
+
+이는 원본 LogAgent 운영 코드에서 LLM이 보고서만 작성하던 역할과 다른, 사용자가 요청한 **후보 선별 + 원래 LLM 조사 방식의 연구용 treatment**입니다. 같은 LLM이 근거 조회와 최종 진단을 수행합니다. 비교 대상은 후보 전처리와 전달 문맥을 추가한 전체 방식이며 후보 순위 알고리즘만의 효과를 분리한 실험은 아닙니다.
 
 ## 동일하게 고정하는 항목
 
@@ -24,7 +28,8 @@
 - 데이터: 원래 고정 선택 fixture의 OpenRCA2 10개 사례, RCA100 v1.1 4개 사례와 원래 시각·identity·원본 파일 해시.
 - 모델: 원래 protocol의 6개 설정. 모델명, provider transport, reasoning effort, cache 정책을 임의로 대체하지 않습니다.
 - 최대 도구 호출 48회, 최대 턴 58회, 응답당 출력 상한 16,384 tokens, provider 기본 sampling, seed 전송 없음.
-- Raw·Graph·LogAgent의 system/incident prompt는 동일한 원본 함수를 사용합니다. Split의 store 사용 설명만 원저장소의 차이를 유지합니다.
+- Raw·Graph·LogAgent의 system prompt는 byte-identical한 원본 함수를 사용합니다. LogAgent의 조사 도구는 Raw와 동일합니다. incident prompt의 원본 바이트는 그대로 보존하고 LogAgent 조건에만 후보 문맥을 덧붙이므로 전체 user prompt와 입력 토큰 수는 다릅니다. Split의 store 사용 설명은 원저장소의 차이를 유지합니다.
+- 최종 답은 원래 `Diagnosis`, `submit_diagnosis`, 인용 검증을 사용합니다. 잘못된 형식·인용은 원래 루프에서 모델에 오류를 돌려주며 58턴 안에서 새 제출을 허용합니다. 실행이 끝난 답을 사후 보정하거나 채점 결과를 보고 재시도하지 않습니다.
 - 원래 `execute_transfer_cell`과 `evaluate_transfer_run`을 재사용합니다. 원인·인용·근거 검증 조건을 완화하지 않습니다.
 - 원래 데이터 적재·identity·시간창·raw/graph 일치·Tempo 가시성·split 데이터 동등성 gate를 통과해야 모델을 호출합니다.
 - 각 모델·사례·조건 2회씩, 총 **6×14×4×2 = 672개 cell**을 계획했습니다.
@@ -52,7 +57,9 @@ python -m logagent_bench.canonical_scoring
 ## 실행
 
 ```bash
-python -m pip install -e '.[llm]'
+uv venv --python 3.11
+uv pip install --python .venv/bin/python -e '.[llm]'
+source .venv/bin/activate
 logagent-llm plan --output experiments/llm_plan.json
 logagent-llm doctor --greptimedb-repo /path/to/pinned-greptimedb \
   --pricing-snapshot /path/to/reviewed-pricing.json \
@@ -66,9 +73,9 @@ logagent-llm doctor --greptimedb-repo /path/to/pinned-greptimedb \
 ```bash
 logagent-llm run --greptimedb-repo /path/to/pinned-greptimedb \
   --pricing-snapshot /path/to/reviewed-pricing.json \
-  --run-root .reports/llm-v1 \
+  --run-root .reports/llm-v2 \
   --max-new-runs 2 --confirm-paid-api \
-  --output .reports/llm-v1/public-progress.json
+  --output .reports/llm-v2/public-progress.json
 ```
 
 같은 run root로 재개하면 완료 cell은 건너뜁니다. 잘못된 답이나 한도 초과를 점수 향상을 위해 재실행하지 않습니다. STARTED 상태로 끝난 paid cell은 자동 재시도하지 않고 기록 확인이 필요합니다.
@@ -85,8 +92,8 @@ logagent-llm run --greptimedb-repo /path/to/pinned-greptimedb \
 - 토큰·도구 호출은 원래 효율 적격 조건을 충족한 paired 사례에 한해 별도 보고합니다. 비용과 cache 불명확성은 결과 옆에 명시해야 합니다. 현재 자동 통계 코드는 주 정확도 비교를 구현하며, 효율·비용의 별도 보정 분석은 추가 검증 전까지 기술 통계로만 취급합니다.
 
 ```bash
-logagent-llm compare --input .reports/llm-v1/public-progress.json \
-  --output .reports/llm-v1/paired-analysis.json
+logagent-llm compare --input .reports/llm-v2/public-progress.json \
+  --output .reports/llm-v2/paired-analysis.json
 ```
 
-14개 선정 사례와 공개 taxonomy를 알고 만든 초기 연구 구현입니다. 논문에서 일반화나 실질적 우월성을 주장하려면 추가 비공개/미사용 사례, 가설·온톨로지·Thread 도구의 ablation, 여러 반복을 통한 안정성 평가가 필요합니다. 이 실험 설정은 파일로 고정한 분석 계획이며 제3자 공개 사전등록을 뜻하지 않습니다.
+14개 선정 사례와 공개 taxonomy를 알고 만든 초기 연구 구현입니다. v2는 이전 HF 실험의 결과를 확인한 뒤 사용자의 역할 분담 요청을 반영한 개발 실험이며, 미관측 holdout의 확증 결과로 주장할 수 없습니다. 논문에서 일반화나 실질적 우월성을 주장하려면 추가 비공개/미사용 사례, 가설·온톨로지·후보 선별의 ablation, 여러 반복을 통한 안정성 평가가 필요합니다. 이 실험 설정은 파일로 고정한 분석 계획이며 제3자 공개 사전등록을 뜻하지 않습니다.

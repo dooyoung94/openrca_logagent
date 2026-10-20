@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-20T10:45:10.834605+00:00",
+  "protocol_revision": "logagent-matched-llm-v2",
+  "protocol_sha256": "7f0a1a56dbb266928a5a858ac630da62bed8aa1cf737b82c6f21eddef31a9c46",
+  "upstream_revision": "fdfbca65c87c36c6b06bddfa6d611544f13bfa34",
+  "sdk_package_version": "0.1.0",
+  "test_suite": {
+    "command": "python -m unittest discover -s tests -v",
+    "python_version": "3.11.17",
+    "tests_run": 34,
+    "passed": 34,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "provider_and_query_gateway": "scripted offline doubles; actual upstream tool loop and validators",
+    "benchmark_result": false
+  },
+  "verified_behaviors": [
+    "preselection runs once before first provider request",
+    "same Raw system prompt, investigation tools, submit schema and validator",
+    "original incident prompt preserved as prefix; only candidate context appended",
+    "Top-1 verdict and answer metadata not included in candidate handoff",
+    "candidate subprocess blocks answer-bearing file reads",
+    "invalid locus shape and unsupported citation cause original in-loop feedback",
+    "LLM may select a cause outside the shortlist",
+    "empty shortlist still permits investigation",
+    "invalid output remains failed after 58 turns; no post-run repair",
+    "selector failure prevents first provider request",
+    "preselection time included in total elapsed time and separately recorded"
+  ],
+  "source_and_historical_measurement_preservation": [
+    {
+      "path": "src/logagent_bench/engine.py",
+      "sha256": "099f8d240237a61037eb1e70c361f1e3c448cfcb3abd6c54b920fac0fd2547b8",
+      "unchanged": true
+    },
+    {
+      "path": "src/logagent_bench/adapter.py",
+      "sha256": "d1ff7fc2e0da4fba6b368c69455e46cdd186c5df5f6c593c3570fd8e13bcdad6",
+      "unchanged": true
+    },
+    {
+      "path": "configs/hypothesis.yaml",
+      "sha256": "f00ba92235a99348339e127ec28f2ceb152d2b12d06e07452385b135a248e519",
+      "unchanged": true
+    },
+    {
+      "path": "results/baseline_public.json",
+      "sha256": "53cae99b88dddabc6419b51683bbca9b3a48fb92af13c1cf0ae4e1e70b1b4643",
+      "unchanged": true
+    },
+    {
+      "path": "results/hf-actions-39402033849/RESULTS.md",
+      "sha256": "8b0552eb3fb0a468552868e5cc67288baf8bf2d52e039e8fd970d925b8b719a4",
+      "unchanged": true
+    },
+    {
+      "path": "results/hf-actions-39402033849/contract_audit.json",
+      "sha256": "033821f1d610c3e38bd8f487f48cee28807026214960db2d9a8defc6c7c869af",
+      "unchanged": true
+    },
+    {
+      "path": "results/hf-actions-39402033849/results.json",
+      "sha256": "53a41149ebe1bc92ae1c925914430705b077f312becbde9d22cf28210dd898ba",
+      "unchanged": true
+    },
+    {
+      "path": "results/hf-actions-39402033849/sealed_predictions.json",
+      "sha256": "f01aaf60a51c46f71c6ecaa31086776df4fd122112b48634a1e44df0227388f3",
+      "unchanged": true
+    },
+    {
+      "path": "results/v1/RESULTS.md",
+      "sha256": "0eaa0569f500acbda90942d73741ab79b36904c5c09fac1e08e5ac9149e8c2a6",
+      "unchanged": true
+    },
+    {
+      "path": "results/v1/protocol.json",
+      "sha256": "28df6200d0caa8258c31de0c77e392315516b905c58a9a45b365dfd189a54b52",
+      "unchanged": true
+    },
+    {
+      "path": "results/v1/results.json",
+      "sha256": "242b11d0773e8027a056abbd1f0db94c31d25d0426b42374db3b08a00d0bfb87",
+      "unchanged": true
+    },
+    {
+      "path": "results/v1/source_audit.json",
+      "sha256": "b5f852f17a2317707dc2be1a184a847b0bdb99f7f4620c31b4d54c51c38857f3",
+      "unchanged": true
+    },
+    {
+      "path": "results/v1/upstream_scorer_validation.json",
+      "sha256": "eeb3dc89961159da18c9059719c975633420c7d16ca09b325cd82db010887e72",
+      "unchanged": true
+    }
+  ],
+  "actual_new_benchmark_provider_calls": 0,
+  "new_accuracy": null,
+  "preflight_status": "BLOCKED_BEFORE_MODEL_CALLS",
+  "missing_environment_checks": [
+    "docker_cli_present",
+    "provider_credentials_present",
+    "greptimedb_revision_matches",
+    "release_binary_exists",
+    "pricing_snapshot_supplied",
+    "dashscope_runtime_endpoint_present"
+  ],
+  "scope": "implementation and provider-free validation only; historical HF scores are unchanged and are not this protocol result"
+}

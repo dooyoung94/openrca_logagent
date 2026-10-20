@@ -1,4 +1,4 @@
-"""Matched upstream replication plus a LogAgent navigation-tool treatment.
+"""Matched upstream replication plus LogAgent candidate preselection.
 
 No provider is called until dependencies, credentials, pricing, source storage
 audits, an explicit paid flag and a bounded batch have all been checked.
@@ -13,11 +13,8 @@ import urllib.request
 import uuid
 from pathlib import Path
 
-import yaml
-
-from .adapter import load_bundle
+from .candidates import build_isolated_shortlist
 from .datasets import ROOT, OPENRCA2_REVISION, cohort, digest
-from .engine import evaluate
 from .experiment import environment_check, canonical_sha
 from .runner import prepare_input
 from .upstream_bridge import run_logagent_agent
@@ -127,9 +124,12 @@ def run_matched(plan, args):
                     active.parent.mkdir(exist_ok=True)
                     active.write_text(json.dumps({"status": "STARTED", "cell": cell}))
                     protocol = loaded[model_config[cell["model"]]["upstream_protocol"]][0]
-                    metrics = {"architecture_build_seconds": 0.0, "architecture_tool_calls": 0}
+                    metrics = {"architecture_build_seconds": 0.0, "architecture_preselection_runs": 0}
                     def loader():
-                        return evaluate(load_bundle(isolated), yaml.safe_load((ROOT / "configs/hypothesis.yaml").read_text()))
+                        return build_isolated_shortlist(
+                            isolated, ROOT / "configs/hypothesis.yaml",
+                            root / "private" / "candidates" / f"cell-{cell['cell_index']:04d}.json",
+                        )
                     fn = upstream_agent.run_agent
                     if cell["arm"] == "logagent":
                         def fn(gateway, case_input, visibility, **kwargs):
