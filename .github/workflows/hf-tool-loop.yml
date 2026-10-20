@@ -2,9 +2,6 @@ name: HF original RCA tool loop
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/workflows/hf-tool-loop.yml'
 
 permissions:
   contents: read

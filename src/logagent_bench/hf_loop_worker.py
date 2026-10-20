@@ -21,7 +21,7 @@ def main():
     # Import the SDK before installing the guard; it loads code, not reference
     # fixtures. Scoring and all answer-bearing files remain outside this worker.
     import agent_rca_bench.agent as agent
-    from agent_rca_bench.contracts import AgentRun, ApiTransport, CaseInput, Visibility
+    from agent_rca_bench.contracts import AgentRun, AgentUsage, ApiTransport, CaseInput, Visibility
     from agent_rca_bench.greptimedb.client import GreptimeClient
     from agent_rca_bench.greptimedb.visibility import QueryGateway
     from llama_cpp import Llama
@@ -70,7 +70,8 @@ def main():
                         run = AgentRun(run_id=uuid.uuid4().hex, visibility=Visibility.RAW,
                             model=settings["model"], api_transport=settings["api_transport"], reasoning_effort=None,
                             max_output_tokens=settings["max_output_tokens"], diagnosis=None, error=str(error),
-                            elapsed_seconds=time.perf_counter()-started)
+                            elapsed_seconds=time.perf_counter()-started,
+                            tool_calls=[],usage=AgentUsage(),responses=[])
                 private = {"case_id":case["case_id"], "dataset":case["dataset"], "arm":arm,
                     "repetition":repetition, "seed":seed, "llm_used":True,
                     "run":run.model_dump(mode="json"), "architecture":metrics,
