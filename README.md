@@ -4,6 +4,20 @@
 
 운영 코드 전체나 Jennifer 전용 임계치를 복사하지 않습니다. 원래 ZIP의 해시와 설계 참조 모듈은 `provenance/architecture_source.json`에 기록합니다. 운영 DB, Neo4j 서버, Jennifer API, LLM API 키가 필요하지 않습니다.
 
+## 실제 Hugging Face LLM 결과
+
+공개 **Qwen3-1.7B Q8** 가중치로 같은 14개 사례를 2조건·2반복, 총 **56회 실제 추론**했습니다. 아래 분모는 모델 실행 수입니다.
+
+| 데이터셋 | 관측 요약 + LLM | LogAgent 후보 + LLM |
+|---|---:|---:|
+| OpenRCA2, 10개 사례 | 0/20, **0.00%** | 6/20, **30.00%** |
+| RCA100, 4개 사례 | 0/8, **0.00%** | 2/8, **25.00%** |
+| 전체, 14개 사례 | 0/28, **0.00%** | 8/28, **28.57%** |
+
+**해석에 필요한 제한:** 원본 진단 구조 검증에서 관측 요약 조건 28/28개, LogAgent 조건 19/28개 출력이 거부됐고 모두 오답에 포함했습니다. 컴포넌트와 간선 위치 필드를 함께 채운 답변 등으로, JSON 문법이 맞는 것과 원본 진단 계약을 지키는 것은 다릅니다. 모델 답변을 사후 보정하지 않았습니다. 이 결과는 출력 계약 실패가 많이 포함된 단일 경량 모델 실험이며, 원본 6개 모델 합산 점수와 같은 실험으로 해석하지 않습니다.
+
+[실측 JSON](results/hf-actions-39402033849/results.json) · [출력 계약 감사](results/hf-actions-39402033849/contract_audit.json) · [한국어 측정 설명](docs/MEASUREMENT_HF_KO.md) · [추론 실행](https://github.com/dooyoung94/openrca_logagent/actions/runs/39402033849) · [원본 채점기 집계](https://github.com/dooyoung94/openrca_logagent/actions/runs/39403123956)
+
 ## Python 측정 결과 (LLM 미사용)
 
 | 대상 | 원인 위치·기전 모두 정답 | 정답률 | 위치 정답률 |
@@ -21,7 +35,7 @@
 - [원저장소 모델별 OpenRCA2·RCA100 정답률](docs/BASELINE_RESULTS.md): 원본 공개 JSON에서 계산한 Split·Raw·Graph의 과거 측정치.
 - [LLM 실험 조건·멀티 답변 처리·실행 방법](docs/PAPER_PROTOCOL.md): 같은 6개 모델·동일 prompt·48회 도구·58턴·16,384 출력 상한·같은 공식 scorer에 LogAgent 도구 arm을 추가합니다.
 - 원래 6개 모델 실험은 14사례 × 6모델 × 4조건 × 2회 = **672개 cell** 계획입니다. 이 6개 모델 설정의 실제 호출은 **0회**입니다. API 키·고정 GreptimeDB build·Docker·가격 스냅샷이 없어 실행 전 점검에서 중단됐습니다.
-- 별도로 [Hugging Face 로컬 LLM 실험](docs/HF_LOCAL_KO.md)을 실행합니다. 공개 Qwen3-1.7B Q8 가중치를 실제로 내려받아 사용하며, 같은 14개 사례의 관측 요약 조건과 LogAgent 후보 추가 조건을 비교합니다. 원래 Qwen API 모델이나 6개 모델 합산 실험과는 별개입니다. 완료 전 정확도는 발표하지 않습니다.
+- 별도로 [Hugging Face 로컬 LLM 실험](docs/HF_LOCAL_KO.md)을 완료했습니다. 공개 Qwen3-1.7B Q8 가중치를 실제로 내려받아 사용했으며, 같은 14개 사례의 관측 요약 조건과 LogAgent 후보 추가 조건을 비교했습니다. 원래 Qwen API 모델이나 6개 모델 합산 실험과는 별개입니다.
 - 원래의 허용 대체 정답과 별칭은 보존하고, 여러 후보를 내놓았다는 이유로 Top-1을 정답 처리하지 않습니다.
 
 ```bash

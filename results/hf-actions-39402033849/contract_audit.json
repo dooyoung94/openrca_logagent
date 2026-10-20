@@ -1,0 +1,34 @@
+{
+  "evaluation": "unchanged upstream Diagnosis validation, followed by evaluate_transfer_run for valid structured answers; invalid model diagnoses count as failed cells",
+  "model_answers_repaired": false,
+  "predictions_regenerated_after_scoring": false,
+  "summary": {
+    "summary_llm": {
+      "executions": 28,
+      "valid_upstream_diagnosis_shapes": 0,
+      "invalid_model_diagnosis_shapes": 28,
+      "scorer_infrastructure_errors": 0,
+      "rejection_reasons": {
+        "dependency-edge diagnosis must not define causal_component": 20,
+        "component diagnosis must not define an edge": 8
+      }
+    },
+    "logagent_llm": {
+      "executions": 28,
+      "valid_upstream_diagnosis_shapes": 9,
+      "invalid_model_diagnosis_shapes": 19,
+      "scorer_infrastructure_errors": 0,
+      "rejection_reasons": {
+        "dependency-edge diagnosis must not define causal_component": 10,
+        "component diagnosis must not define an edge": 7,
+        "infrastructure_node diagnosis must not define an edge": 2
+      }
+    }
+  },
+  "total_rejections": {
+    "dependency-edge diagnosis must not define causal_component": 30,
+    "component diagnosis must not define an edge": 15,
+    "infrastructure_node diagnosis must not define an edge": 2
+  },
+  "facts": "All 47 scoring_error entries are upstream ValidationError rejections of invalid model field combinations; none is an infrastructure exception. JSON syntax validity is not diagnosis contract validity."
+}

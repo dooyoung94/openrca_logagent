@@ -1,6 +1,8 @@
 # LLM 비교 실험: 고정 조건과 실행 상태
 
-현재 상태: **구현·계약 테스트 완료, 실제 LLM 호출 0회**. API 키, 고정 GreptimeDB release build, Docker와 실행 시점 가격 스냅샷이 없어 실행 전 점검에서 중단됩니다. `experiments/environment_check.json`이 실제 점검 결과입니다. LLM 정확도와 비용은 `null`이며 Python의 90%를 LLM 성능으로 복사하지 않습니다.
+이 문서는 원래 6개 API 모델의 672회 비교 계획입니다. 별도의 단일 HF 경량 모델 실험 56회는 완료했으며, [실측 결과와 출력 계약 실패](MEASUREMENT_HF_KO.md)에 기록합니다. 두 실험의 모델과 분모를 합치지 않습니다.
+
+원래 6개 모델 실험 상태: **구현·계약 테스트 완료, 해당 모델 설정의 실제 호출 0회**. API 키, 고정 GreptimeDB release build, Docker와 실행 시점 가격 스냅샷이 없어 실행 전 점검에서 중단됩니다. `experiments/environment_check.json`이 실제 점검 결과입니다. 이 6개 모델 재실행의 정확도와 비용은 `null`이며 Python의 90%를 LLM 성능으로 복사하지 않습니다. 별도 HF 실측은 위 링크에서 확인할 수 있습니다.
 
 ## 비교할 네 조건
 

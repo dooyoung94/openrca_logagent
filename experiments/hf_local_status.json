@@ -1,13 +1,126 @@
 {
   "experiment": "hf-actions-parallel-v1",
-  "status": "RUNNING",
-  "observed_at": "2026-10-20T09:39:06.340051+00:00",
-  "github_run_id": 39402033849,
-  "source_commit": "9653684a77395451687dec51df2cb11c9c7cb9d7",
-  "run_url": "https://github.com/dooyoung94/openrca_logagent/actions/runs/39402033849",
-  "planned_cells": 56,
+  "status": "COMPLETED",
+  "observed_at": "2026-10-20T09:52:29.584117+00:00",
+  "github_inference_run_id": 39402033849,
+  "github_collection_run_id": 39403123956,
+  "actual_model_calls_in_completed_experiment": 56,
   "independent_cases": 14,
-  "accuracy": null,
-  "earlier_local_attempts": "retired without scoring; see hf_execution_history.json",
+  "summary_by_dataset": {
+    "openrca2": {
+      "summary_llm": {
+        "independent_cases": 10,
+        "executions": 20,
+        "correct_executions": 0,
+        "diagnosis_accuracy": 0.0,
+        "location_correct_executions": 0,
+        "abstentions": 0,
+        "runner_errors": 0,
+        "scoring_errors": 20,
+        "prompt_tokens": 85754,
+        "completion_tokens": 2375,
+        "inference_seconds": 842.801
+      },
+      "logagent_llm": {
+        "independent_cases": 10,
+        "executions": 20,
+        "correct_executions": 6,
+        "diagnosis_accuracy": 0.3,
+        "location_correct_executions": 6,
+        "abstentions": 0,
+        "runner_errors": 0,
+        "scoring_errors": 14,
+        "prompt_tokens": 88712,
+        "completion_tokens": 2349,
+        "inference_seconds": 892.166
+      }
+    },
+    "rca100": {
+      "summary_llm": {
+        "independent_cases": 4,
+        "executions": 8,
+        "correct_executions": 0,
+        "diagnosis_accuracy": 0.0,
+        "location_correct_executions": 0,
+        "abstentions": 0,
+        "runner_errors": 0,
+        "scoring_errors": 8,
+        "prompt_tokens": 36450,
+        "completion_tokens": 935,
+        "inference_seconds": 480.481
+      },
+      "logagent_llm": {
+        "independent_cases": 4,
+        "executions": 8,
+        "correct_executions": 2,
+        "diagnosis_accuracy": 0.25,
+        "location_correct_executions": 2,
+        "abstentions": 0,
+        "runner_errors": 0,
+        "scoring_errors": 5,
+        "prompt_tokens": 37232,
+        "completion_tokens": 983,
+        "inference_seconds": 408.571
+      }
+    },
+    "all": {
+      "summary_llm": {
+        "independent_cases": 14,
+        "executions": 28,
+        "correct_executions": 0,
+        "diagnosis_accuracy": 0.0,
+        "location_correct_executions": 0,
+        "abstentions": 0,
+        "runner_errors": 0,
+        "scoring_errors": 28,
+        "prompt_tokens": 122204,
+        "completion_tokens": 3310,
+        "inference_seconds": 1323.282
+      },
+      "logagent_llm": {
+        "independent_cases": 14,
+        "executions": 28,
+        "correct_executions": 8,
+        "diagnosis_accuracy": 0.2857142857142857,
+        "location_correct_executions": 8,
+        "abstentions": 0,
+        "runner_errors": 0,
+        "scoring_errors": 19,
+        "prompt_tokens": 125944,
+        "completion_tokens": 3332,
+        "inference_seconds": 1300.737
+      }
+    }
+  },
+  "model": {
+    "repo_id": "Qwen/Qwen3-1.7B-GGUF",
+    "revision": "90862c4b9d2787eaed51d12237eafdfe7c5f6077",
+    "filename": "Qwen3-1.7B-Q8_0.gguf",
+    "sha256": "061b54daade076b5d3362dac252678d17da8c68f07560be70818cace6590cb1a"
+  },
+  "result_path": "results/hf-actions-39402033849/results.json",
+  "strict_output_failures": {
+    "summary_llm": {
+      "executions": 28,
+      "valid_upstream_diagnosis_shapes": 0,
+      "invalid_model_diagnosis_shapes": 28,
+      "scorer_infrastructure_errors": 0,
+      "rejection_reasons": {
+        "dependency-edge diagnosis must not define causal_component": 20,
+        "component diagnosis must not define an edge": 8
+      }
+    },
+    "logagent_llm": {
+      "executions": 28,
+      "valid_upstream_diagnosis_shapes": 9,
+      "invalid_model_diagnosis_shapes": 19,
+      "scorer_infrastructure_errors": 0,
+      "rejection_reasons": {
+        "dependency-edge diagnosis must not define causal_component": 10,
+        "component diagnosis must not define an edge": 7,
+        "infrastructure_node diagnosis must not define an edge": 2
+      }
+    }
+  },
   "original_six_model_experiment": "not executed"
 }

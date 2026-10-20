@@ -60,5 +60,13 @@
       "accuracy": null,
       "reason": "All 14 inference jobs succeeded. Original scorer declares Python >=3.11,<3.12, so install on 3.12 was rejected. Offline-only collection on Python 3.11 reuses these exact 56 hash-sealed predictions. No model call is repeated."
     }
-  ]
+  ],
+  "completed_measurement": {
+    "github_inference_run_id": 39402033849,
+    "github_collection_run_id": 39403123956,
+    "model_calls": 56,
+    "result_path": "results/hf-actions-39402033849/results.json",
+    "original_predictions_preserved": true,
+    "post_score_model_or_prompt_tuning": false
+  }
 }

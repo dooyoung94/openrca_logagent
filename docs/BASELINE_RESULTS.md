@@ -1,5 +1,7 @@
 # 원저장소의 데이터셋별 공개 정답률
 
+아래는 원래 6개 모델의 과거 공개 결과입니다. 후속 [HF 단일 모델 실측](MEASUREMENT_HF_KO.md)은 모델·입력 인터페이스가 다른 별도 실험이며 같은 분모로 합산하지 않습니다.
+
 고정 commit의 six-model JSON에서 `diagnosis_by_dataset`을 읽어 계산했습니다. Capability 종합점수와 구분합니다. OpenRCA2는 모델·인터페이스당 20회(10사례×2회), RCA100은 8회(4사례×2회)입니다.
 
 ## OpenRCA2 선정 10개 사례
