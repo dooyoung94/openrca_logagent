@@ -1,6 +1,7 @@
 {
-  "schema_version": 1,
-  "comparison_id": "selected-cohort-three-way-v1",
+  "schema_version": 2,
+  "comparison_id": "selected-cohort-three-way-v2-interface-audit",
+  "revision_reason": "The first comparison did not cross all three methods with Raw and Graph. Existing Python predictions are an unassigned Parquet/ontology pilot, not a paired interface experiment.",
   "created_at": "2026-10-20",
   "paper": {
     "title": "OpenRCA 2.0: From Outcome Labels to Causal Process Supervision",
@@ -20,10 +21,23 @@
     "independent_unit": "case; repetitions and multiple backbones do not create new independent cases"
   },
   "methods": [
-    {"id": "python_logagent", "label": "Python LogAgent", "role": "architecture without LLM", "source": "results/v1/results.json"},
+    {"id": "python_logagent", "label": "Python LogAgent", "role": "unassigned-interface pilot only", "source": "results/v1/results.json", "input_protocol": "direct Parquet telemetry plus internally reconstructed ontology", "raw_graph_pair_measured": false},
     {"id": "logagent_hf", "label": "LogAgent candidates + original Raw loop + HF", "role": "candidate-selection treatment"},
     {"id": "raw_hf", "label": "Original Raw loop + same HF", "role": "matched LLM control"}
   ],
+  "required_interface_design": {
+    "status": "REQUIRED_NOT_COMPLETED",
+    "methods": ["python_logagent", "logagent_hf", "original_hf"],
+    "interfaces": ["raw", "semantic_graph"],
+    "raw": "Original read-only GreptimeDB SQL/PromQL telemetry surface; constructing relations from observed spans internally remains allowed.",
+    "semantic_graph": "Same Raw telemetry surface plus actual GreptimeDB Semantic Graph catalog, profiles, entities, relationships and query tools. Not publisher causal_graph.json.",
+    "python_adapter_gap": "Current Python code reads Parquet directly. Neither original Raw access nor Semantic Graph access has been implemented and measured as a controlled pair.",
+    "llm_graph_gap": "Current candidate bridge accepts only Visibility.RAW; the HF workflow has no semantic_graph arm.",
+    "architecture_policy": "Keep LogAgent's hypothesis, time, ontology and scoring architecture fixed in both arms. Do not substitute ontology-off versus ontology-on for the original interface comparison.",
+    "comparability": "Same cases, telemetry, windows, source hashes, output schema and scorer; same HF weights and sampling for both LLM methods and interfaces.",
+    "single_hf_backbone_schedule": {"independent_cases": 14, "methods": 3, "interfaces": 2, "repetitions": 2, "required_executions": 168, "status": "DESIGN_ONLY_NOT_EXECUTED"},
+    "paper_evaluation_gap": "All six conditions need common root_causes/propagation output and paper outcome/process scoring before claiming paper-method compliance. This is not implemented by the reporting matrix."
+  },
   "hf_measurement": {
     "source_run_id": "39419829987",
     "source_commit": "5da5d75fa88d555acbec615992a7eaef2dae9b52",

@@ -42,6 +42,29 @@ class ComparisonIntegrityTests(unittest.TestCase):
         self.assertEqual(report["historical_references"][0]["results"]["all"]["executions"], 168)
         self.assertIsNone(report["paper_metrics"]["python_logagent"]["EM"]["value"])
 
+    def test_python_pilot_cannot_populate_either_interface(self):
+        report = comparison.build(self.root)
+        rows = [row for row in report["interface_matrix"] if row["method"] == "python_logagent"]
+        self.assertEqual({row["interface"] for row in rows}, {"raw", "semantic_graph"})
+        for row in rows:
+            self.assertEqual(row["status"], "NOT_IMPLEMENTED")
+            self.assertIsNone(row["results"]["all"])
+        self.assertFalse(report["full_raw_graph_comparison_completed"])
+        self.assertIsNone(report["methods"][0]["interface"])
+
+    def test_raw_hf_progress_never_populates_graph(self):
+        self.write("experiments/hf_tool_loop_progress.json", {"source_run_id": "39419829987",
+                   "checked_at": "2026-10-20T13:00:00Z", "run_status": "in_progress",
+                   "completed_case_jobs": 6, "failed_case_jobs": 0})
+        report = comparison.build(self.root)
+        self.assertEqual(len(report["interface_matrix"]), 6)
+        for row in report["interface_matrix"]:
+            if row["interface"] == "semantic_graph":
+                self.assertEqual(row["status"], "NOT_IMPLEMENTED")
+                self.assertIsNone(row["results"]["all"])
+            elif row["method"] != "python_logagent":
+                self.assertEqual(row["status"], "RUNNING_NOT_AGGREGATED")
+
     def test_partial_hf_cells_are_not_scored_as_zero_or_excluded(self):
         spec = comparison.read(self.root / "experiments/three_way_comparison_protocol.json")["hf_measurement"]
         self.write(spec["source"], {"status": "COMPLETED", "completed_cells": 55})

@@ -6,6 +6,8 @@
 
 ## 세 방법의 비교표와 논문 평가 범위
 
+**세 방법의 Raw·Graph 비교는 아직 완료하지 않았습니다.** 기존 Python 90%·50%·78.57%는 Parquet 관측과 자체 온톨로지를 사용한 단일 사전실험이며 Raw 또는 Graph의 별도 성능이 아닙니다. Python 두 접근 경로와 두 LLM 방법의 Graph 조건은 미구현·미측정입니다. 현재 HF 56회는 Raw 두 방법의 실행이며, 완료돼도 전체 3×2 비교나 논문 평가가 완성되지는 않습니다. [조건별 실행 상태](docs/THREE_WAY_COMPARISON_KO.md)를 확인하십시오.
+
 [Python LogAgent / LogAgent+HF / 원래 GitHub 방식 비교표](docs/THREE_WAY_COMPARISON_KO.md)를 제공합니다. 같은 HF 모델의 Raw 대조군과 원래 6개 모델의 공개 Raw·Graph 결과를 함께 확인할 수 있습니다. [구조화 수치와 입력 해시](results/three_way_comparison.json), [고정 집계 조건](experiments/three_way_comparison_protocol.json)도 보관합니다.
 
 arXiv:2606.27154v2의 결과·인과 과정 평가 구분에 따라 지표 적용 범위를 점검했습니다. 현재 진단 정답률은 논문의 원인 집합 EM·F1과 다릅니다. 전파 그래프와 SQL 재실행 평가가 필요한 PR·Node/Edge F1·SQL Exec은 아직 산출하지 않았습니다. 비교표는 지정된 HF 실행이 완료되면 저장된 56개 결과를 검증해 갱신하며 추론을 다시 실행하지 않습니다.

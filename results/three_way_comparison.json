@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "comparison_id": "selected-cohort-three-way-v1",
+  "schema_version": 2,
+  "comparison_id": "selected-cohort-three-way-v2-interface-audit",
   "primary_metric": {
     "id": "upstream_diagnosis_accuracy",
     "definition": "Unchanged upstream diagnosis_correct: causal scope, locus, fault category and accepted mechanism must all match.",
@@ -23,9 +23,12 @@
   "methods": [
     {
       "id": "python_logagent",
-      "label": "① Python LogAgent",
+      "label": "Python 사전실험 — Raw/Graph 미분리",
       "llm": "사용 안 함",
-      "status": "COMPLETED",
+      "status": "COMPLETED_PILOT_NOT_INTERFACE_COMPARISON",
+      "interface": null,
+      "raw_graph_pair_measured": false,
+      "input_protocol": "direct Parquet telemetry plus internally reconstructed ontology",
       "results": {
         "openrca2": {
           "independent_cases": 10,
@@ -55,6 +58,8 @@
       "label": "② LogAgent 후보 + 원래 LLM 루프",
       "llm": "Qwen3-1.7B Q8_0 (HF)",
       "status": "NOT_AGGREGATED",
+      "interface": "raw",
+      "raw_graph_pair_measured": false,
       "results": {
         "openrca2": null,
         "rca100": null,
@@ -66,6 +71,8 @@
       "label": "③ 원래 Raw LLM 루프 — 동일 HF 대조군",
       "llm": "Qwen3-1.7B Q8_0 (HF)",
       "status": "NOT_AGGREGATED",
+      "interface": "raw",
+      "raw_graph_pair_measured": false,
       "results": {
         "openrca2": null,
         "rca100": null,
@@ -236,6 +243,108 @@
       }
     ]
   },
+  "required_interface_design": {
+    "status": "REQUIRED_NOT_COMPLETED",
+    "methods": [
+      "python_logagent",
+      "logagent_hf",
+      "original_hf"
+    ],
+    "interfaces": [
+      "raw",
+      "semantic_graph"
+    ],
+    "raw": "Original read-only GreptimeDB SQL/PromQL telemetry surface; constructing relations from observed spans internally remains allowed.",
+    "semantic_graph": "Same Raw telemetry surface plus actual GreptimeDB Semantic Graph catalog, profiles, entities, relationships and query tools. Not publisher causal_graph.json.",
+    "python_adapter_gap": "Current Python code reads Parquet directly. Neither original Raw access nor Semantic Graph access has been implemented and measured as a controlled pair.",
+    "llm_graph_gap": "Current candidate bridge accepts only Visibility.RAW; the HF workflow has no semantic_graph arm.",
+    "architecture_policy": "Keep LogAgent's hypothesis, time, ontology and scoring architecture fixed in both arms. Do not substitute ontology-off versus ontology-on for the original interface comparison.",
+    "comparability": "Same cases, telemetry, windows, source hashes, output schema and scorer; same HF weights and sampling for both LLM methods and interfaces.",
+    "single_hf_backbone_schedule": {
+      "independent_cases": 14,
+      "methods": 3,
+      "interfaces": 2,
+      "repetitions": 2,
+      "required_executions": 168,
+      "status": "DESIGN_ONLY_NOT_EXECUTED"
+    },
+    "paper_evaluation_gap": "All six conditions need common root_causes/propagation output and paper outcome/process scoring before claiming paper-method compliance. This is not implemented by the reporting matrix."
+  },
+  "interface_matrix": [
+    {
+      "method": "python_logagent",
+      "label": "① Python LogAgent",
+      "interface": "raw",
+      "status": "NOT_IMPLEMENTED",
+      "results": {
+        "openrca2": null,
+        "rca100": null,
+        "all": null
+      },
+      "paper_evaluation_completed": false
+    },
+    {
+      "method": "python_logagent",
+      "label": "① Python LogAgent",
+      "interface": "semantic_graph",
+      "status": "NOT_IMPLEMENTED",
+      "results": {
+        "openrca2": null,
+        "rca100": null,
+        "all": null
+      },
+      "paper_evaluation_completed": false
+    },
+    {
+      "method": "logagent_hf",
+      "label": "② LogAgent 후보 + HF LLM",
+      "interface": "raw",
+      "status": "RUNNING_NOT_AGGREGATED",
+      "results": {
+        "openrca2": null,
+        "rca100": null,
+        "all": null
+      },
+      "paper_evaluation_completed": false
+    },
+    {
+      "method": "logagent_hf",
+      "label": "② LogAgent 후보 + HF LLM",
+      "interface": "semantic_graph",
+      "status": "NOT_IMPLEMENTED",
+      "results": {
+        "openrca2": null,
+        "rca100": null,
+        "all": null
+      },
+      "paper_evaluation_completed": false
+    },
+    {
+      "method": "original_hf",
+      "label": "③ 원래 GitHub 루프 + 동일 HF",
+      "interface": "raw",
+      "status": "RUNNING_NOT_AGGREGATED",
+      "results": {
+        "openrca2": null,
+        "rca100": null,
+        "all": null
+      },
+      "paper_evaluation_completed": false
+    },
+    {
+      "method": "original_hf",
+      "label": "③ 원래 GitHub 루프 + 동일 HF",
+      "interface": "semantic_graph",
+      "status": "NOT_IMPLEMENTED",
+      "results": {
+        "openrca2": null,
+        "rca100": null,
+        "all": null
+      },
+      "paper_evaluation_completed": false
+    }
+  ],
+  "full_raw_graph_comparison_completed": false,
   "paper_alignment": "retrospective design and metric-coverage audit; not an exact paper replication or preregistration",
   "paper_metrics": {
     "python_logagent": {
@@ -354,7 +463,7 @@
     }
   },
   "source_sha256": {
-    "experiments/three_way_comparison_protocol.json": "e820194288798920a1fb3bea96bc53f3711aef9945df7339d14d78ef63d4ca54",
+    "experiments/three_way_comparison_protocol.json": "39bcdad426a7651d4c976d10a77f8644948dea85780fab47fe1a07069e032769",
     "results/v1/results.json": "242b11d0773e8027a056abbd1f0db94c31d25d0426b42374db3b08a00d0bfb87",
     "results/v1/upstream_scorer_validation.json": "eeb3dc89961159da18c9059719c975633420c7d16ca09b325cd82db010887e72",
     "results/baseline_public.json": "53cae99b88dddabc6419b51683bbca9b3a48fb92af13c1cf0ae4e1e70b1b4643",
