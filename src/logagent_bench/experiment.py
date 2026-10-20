@@ -42,14 +42,16 @@ def make_plan(selected_models=None):
         if set(selected_models) - known:
             raise ValueError("Unknown model; substitutions require a new protocol")
         roster = [m for m in roster if m["model"] in selected_models]
-    case_ids = [c["opaque_case_id"] for c in cohort()]
+    selected_cases = cohort()
+    case_ids = [c["opaque_case_id"] for c in selected_cases]
+    case_datasets = {c["opaque_case_id"]: c["dataset"] for c in selected_cases}
     schedule = []
     for case_index, case_id in enumerate(case_ids):
         for model_index, model in enumerate(roster):
             for repetition in range(2):
                 offset = (case_index + model_index + repetition) % len(ARMS)
                 for arm in ARMS[offset:] + ARMS[:offset]:
-                    schedule.append({"cell_index": len(schedule), "case_id": case_id,
+                    schedule.append({"cell_index": len(schedule), "case_id": case_id, "dataset": case_datasets[case_id],
                                      "model": model["model"], "repetition": repetition, "arm": arm})
     binding = {p.relative_to(ROOT).as_posix(): digest(p) for p in sorted((ROOT / "src/logagent_bench").glob("*.py"))}
     binding["configs/hypothesis.yaml"] = digest(ROOT / "configs/hypothesis.yaml")
@@ -78,10 +80,17 @@ def make_plan(selected_models=None):
                 "policy_status": "frozen port v1; no tuning against LLM outputs",
                 "answer_semantics": "unchanged upstream Top-1 scorer; declared identity aliases and alternative mechanisms accepted; alternative_candidates retained but not promoted to correct answers",
                 "files_sha256": binding}
-    return {"schema_version": 1, "status": "PLANNED_NOT_EXECUTED", "protocol": protocol,
+    targets = {dataset: {"cases": sum(c["dataset"] == dataset for c in selected_cases),
+                         "models": len(roster), "repetitions": 2,
+                         "runs_per_arm": sum(c["dataset"] == dataset for c in selected_cases) * len(roster) * 2}
+               for dataset in sorted(set(case_datasets.values()))}
+    plan = {"schema_version": 1, "status": "PLANNED_NOT_EXECUTED", "protocol": protocol,
             "protocol_sha256": canonical_sha(protocol), "independent_cases": len(case_ids),
             "expected_cells": len(schedule), "completed_cells": 0, "models": roster,
-            "schedule": schedule, "accuracy": None, "cost": None}
+            "schedule": schedule, "matched_denominators": targets, "accuracy": None, "cost": None}
+    from .llm_summary import summarize
+    plan["summary_by_dataset"] = summarize(plan)
+    return plan
 
 
 def environment_check(plan, greptimedb_repo=None, pricing_snapshot=None):

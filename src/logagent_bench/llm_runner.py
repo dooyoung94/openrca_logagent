@@ -143,6 +143,8 @@ def run_matched(plan, args):
                     report["records"].append(record)
                     report["completed_cells"] = len(report["records"])
                     report["status"] = "COMPLETED" if report["completed_cells"] == report["expected_cells"] else "PARTIAL_NO_COMPARATIVE_CLAIM"
+                    from .llm_summary import summarize
+                    report["summary_by_dataset"] = summarize(report)
                     report_path.write_text(json.dumps(report, indent=2))
                     active.write_text(json.dumps({"status": "COMPLETED", "cell": cell, "private_sha256": digest(private)}))
                     print(f"[LLM] {cell['model']} {case_id} {cell['arm']} rep={cell['repetition']} correct={record['evaluation']['diagnosis_correct']}", flush=True)

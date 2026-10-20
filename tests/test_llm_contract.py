@@ -29,6 +29,27 @@ class PlanTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             make_plan(["unrequested-cheaper-model"])
 
+    def test_original_dataset_denominators_and_historical_references(self):
+        plan=make_plan()
+        self.assertEqual(plan['matched_denominators']['openrca2']['runs_per_arm'],120)
+        self.assertEqual(plan['matched_denominators']['rca100']['runs_per_arm'],48)
+        rows={(r['dataset'],r['arm']):r for r in plan['summary_by_dataset']}
+        self.assertAlmostEqual(rows['openrca2','raw']['historical_public_reference_accuracy'],106/120)
+        self.assertAlmostEqual(rows['openrca2','semantic_graph']['historical_public_reference_accuracy'],112/120)
+        self.assertEqual(rows['rca100','raw']['historical_public_reference_accuracy'],.5)
+        self.assertEqual(rows['rca100','semantic_graph']['historical_public_reference_accuracy'],.25)
+        self.assertTrue(all(r['accuracy'] is None for r in rows.values()))
+
+    def test_finished_llm_dataset_scores_include_failed_cells(self):
+        from logagent_bench.llm_summary import summarize
+        plan=make_plan(['gpt-5.6-sol'])
+        plan['records']=[{**c,'evaluation':{'diagnosis_correct':c['repetition']==0}}
+                         for c in plan['schedule'] if c['dataset']=='rca100' and c['arm']=='logagent']
+        rows={(r['dataset'],r['arm']):r for r in summarize(plan)}
+        self.assertEqual(rows['rca100','logagent']['expected_runs'],8)
+        self.assertEqual(rows['rca100','logagent']['accuracy'],.5)
+        self.assertIsNone(rows['openrca2','logagent']['accuracy'])
+
     def test_session_restored_after_error(self):
         original = type("Original", (), {})
         module = types.SimpleNamespace(InvestigationSession=original)
