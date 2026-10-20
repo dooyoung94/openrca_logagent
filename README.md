@@ -12,7 +12,7 @@
 | RCA100 선정 사례 | 2/4 | **50.00%** | 2/4, 50.00% |
 | 전체 | 11/14 | **78.57%** | 12/14, 85.71% |
 
-각 사례 2회, 총 28회 실행에서 예측이 일치했습니다. 실행 오류는 0건이며, 기권 1건도 오답에 포함했습니다. 자세한 실패 사례와 한계는 [측정 설명](docs/MEASUREMENT_KO.md), 원본 구조화 집계는 [results/v1/results.json](results/v1/results.json)에 있습니다. **전체 OpenRCA2 공식 리더보드 성능이나 Capability 점수가 아닙니다.**
+각 사례 2회, 총 28회 실행에서 예측이 일치했습니다. 실행 오류는 0회이며, 기권한 1개 사례(반복 실행 2회)도 오답에 포함했습니다. 자세한 실패 사례와 한계는 [측정 설명](docs/MEASUREMENT_KO.md), 원본 구조화 집계는 [results/v1/results.json](results/v1/results.json)에 있습니다. **전체 OpenRCA2 공식 리더보드 성능이나 Capability 점수가 아닙니다.**
 
 원저장소 공식 scorer로 다시 채점해도 11/14입니다. [공식 채점 재검증](results/v1/upstream_scorer_validation.json)에는 허용 대체 기전과 source identity 별칭을 반영한 결과가 있습니다.
 
@@ -47,6 +47,20 @@ logagent-bench run --run-root .runs/my-measurement --output results/my-measureme
 Windows PowerShell에서는 활성화 명령을 `.venv\Scripts\Activate.ps1`로 바꿉니다. 기존 측정 디렉터리는 덮어쓰지 않으므로 재실행 시 새 `--run-root`를 사용합니다.
 
 ## 평가 대상
+
+사례 수는 **개**, 모델 실행 수는 **회**, 파일 수는 **개**로 구분합니다. 원저장소의 전체 평가 사례 22개와 최종 RCA 사례 14개는 범위가 다릅니다.
+
+| 집계 대상 | 원저장소 공개 측정 | 이 저장소 |
+|---|---:|---|
+| OpenRCA2 최종 RCA 선정 사례 | 10개 | 같은 10개 |
+| RCA100 최종 RCA 선정 사례 | 4개 | 같은 4개 |
+| Discovery / Graph retrieval 보조 사례 | 6개 / 2개 | 현재 평가 범위에 미포함 |
+| 최종 RCA 모델 실행 | 504회 = 14×6모델×3조건×2반복 | 672회 계획 = 14×6모델×4조건×2반복; 아래 Python 실행과 별도 |
+| 보조 micro 모델 실행 | 192회 = 8×6모델×2조건×2반복 | 미실행 |
+| 전체 공개 모델 실행 | 696회 = 504+192 | 같은 전체 실험을 완료한 상태가 아님 |
+| Python 구조화 진단 실행 | 위 LLM 집계와 별개 | 28회 = 14개 사례×2반복 |
+
+원저장소는 `REPORT.md`의 **Measurement scope**와 `DATASETS.md`의 **Release cohort**를 기준으로 확인했습니다. 원저장소와 맞춘 최종 RCA 합산 분모는 조건당 OpenRCA2 **120회**, RCA100 **48회**입니다. 현재 Python 결과의 9/10·2/4는 독립 사례 기준이며, 원저장소 6개 모델의 실행별 합산 결과와 같은 분모가 아닙니다. 사례가 14개라는 이유로 모델 실행을 14회로 집계하거나, 반복·모델 수를 곱해 독립 사례 수를 늘리지 않습니다.
 
 - Agent RCA Bench v34의 동일 end-to-end cohort: OpenRCA2 ops-lite 10개, RCA100 v1.1 4개.
 - 독립 사례는 14개입니다. 2회 반복은 결정성 검증이며 표본 수를 28개로 부풀리지 않습니다.

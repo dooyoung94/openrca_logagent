@@ -19,7 +19,7 @@
 
 - Benchmark commit: `fdfbca65c87c36c6b06bddfa6d611544f13bfa34`.
 - GreptimeDB revision: `15317a131bc63a680d3571e5f681bee4acc86228`, release build.
-- 데이터: 원래 고정 선택 fixture의 OpenRCA2 10건, RCA100 v1.1 4건과 원래 시각·identity·원본 파일 해시.
+- 데이터: 원래 고정 선택 fixture의 OpenRCA2 10개 사례, RCA100 v1.1 4개 사례와 원래 시각·identity·원본 파일 해시.
 - 모델: 원래 protocol의 6개 설정. 모델명, provider transport, reasoning effort, cache 정책을 임의로 대체하지 않습니다.
 - 최대 도구 호출 48회, 최대 턴 58회, 응답당 출력 상한 16,384 tokens, provider 기본 sampling, seed 전송 없음.
 - Raw·Graph·LogAgent의 system/incident prompt는 동일한 원본 함수를 사용합니다. Split의 store 사용 설명만 원저장소의 차이를 유지합니다.
@@ -32,12 +32,12 @@
 
 ## 정답 및 멀티 답변 처리
 
-- 선정 14건의 공식 `TransferCaseSpec`은 하나의 컴포넌트, 하나의 **방향 있는 간선**, 또는 하나의 인프라 노드를 원인으로 평가합니다. 여러 독립 원인을 모두 맞혀야 하는 multi-fault cohort는 아닙니다.
+- 선정 14개 사례의 공식 `TransferCaseSpec`은 하나의 컴포넌트, 하나의 **방향 있는 간선**, 또는 하나의 인프라 노드를 원인으로 평가합니다. 여러 독립 원인을 모두 맞혀야 하는 multi-fault cohort는 아닙니다.
 - 간선은 source와 destination이 모두 일치해야 합니다. 두 endpoint 중 하나만 맞으면 정답이 아닙니다.
 - 사례 001~003에는 `workload_restart` 외에 직접 로그로 지지되는 `configuration_error`도 허용됩니다. 원래 scorer의 허용 목록을 그대로 사용합니다.
 - 실제 source가 선언한 Pod/Container 별칭은 원래 `component_matches`가 처리합니다. 이름 prefix를 임의로 자르거나 문자열을 나열해 정답을 맞히는 규칙을 만들지 않습니다.
 - 최종 `alternative_candidates`와 Python의 여러 Thread는 보존합니다. 공식 Top-1 진단 정답률을 후보 중 하나만 맞아도 정답으로 바꾸지 않습니다.
-- 추후 여러 독립 원인을 요구하는 데이터셋을 추가한다면 별도 protocol에서 set precision/recall/F1·전체 원인 일치율을 평가해야 하며, 현재 14건의 점수와 섞지 않습니다.
+- 추후 여러 독립 원인을 요구하는 데이터셋을 추가한다면 별도 protocol에서 set precision/recall/F1·전체 원인 일치율을 평가해야 하며, 현재 14개 사례의 점수와 섞지 않습니다.
 
 Python 이식본의 저장된 예측도 원래 scorer로 재검증했습니다. 실행 명령은 아래와 같습니다.
 
