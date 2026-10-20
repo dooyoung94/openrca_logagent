@@ -1,0 +1,24 @@
+{
+  "status": "BLOCKED_BEFORE_MODEL_CALLS",
+  "checks": {
+    "pinned_upstream_sdk_installed": true,
+    "docker_cli_present": false,
+    "provider_credentials_present": false,
+    "greptimedb_revision_matches": false,
+    "release_binary_exists": false,
+    "pricing_snapshot_supplied": false,
+    "dashscope_runtime_endpoint_present": false
+  },
+  "credential_presence": {
+    "gpt-5.6-sol": false,
+    "deepseek-v4-pro": false,
+    "claude-fable-5-1": false,
+    "glm-5.3": false,
+    "gemini-3.8-flash": false,
+    "qwen3.8-max-0902": false
+  },
+  "upstream_sdk_commit": "fdfbca65c87c36c6b06bddfa6d611544f13bfa34",
+  "provider_calls_made": 0,
+  "model_availability_verified": false,
+  "source_storage_gates": "must pass for every case before any paid cell"
+}

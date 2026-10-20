@@ -1,10 +1,13 @@
 # Upstream attribution
 
-The two JSON files under `fixtures/` are copied unchanged from
+The selection and protocol JSON files under `fixtures/` are copied unchanged from
 GreptimeTeam/agent-rca-bench at commit
 `fdfbca65c87c36c6b06bddfa6d611544f13bfa34`.
 Its original code, artifact schemas, report text and independently derived
 aggregates are Apache-2.0 licensed. See `agent-rca-bench/LICENSE`.
+The optional LLM runner imports the unchanged upstream provider runner, prompts,
+environment gates and scorer at that exact commit. The baseline summary under
+`results/baseline_public.json` is derived from its published six-model JSON.
 
 This project does not redistribute upstream telemetry, source archives,
 reference topology, publisher causal graphs, or source ground-truth files.

@@ -11,6 +11,10 @@ dependencies = ["PyYAML>=6,<7", "pyarrow>=18", "sqlglot==30.22.0", "requests>=2.
 
 [project.scripts]
 logagent-bench = "logagent_bench.cli:main"
+logagent-llm = "logagent_bench.experiment:main"
+
+[project.optional-dependencies]
+llm = ["agent-rca-bench @ git+https://github.com/GreptimeTeam/agent-rca-bench.git@fdfbca65c87c36c6b06bddfa6d611544f13bfa34"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

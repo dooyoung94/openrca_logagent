@@ -1,0 +1,168 @@
+{
+  "upstream_commit": "fdfbca65c87c36c6b06bddfa6d611544f13bfa34",
+  "evaluation": "diagnosis fields only; not LLM or citation success",
+  "correct": 11,
+  "cases": 14,
+  "records": [
+    {
+      "case_id": "semantic-rca-transfer-001",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [
+        "configuration_error"
+      ],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-002",
+      "diagnosis_correct": false,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": false,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [
+        "configuration_error"
+      ],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-003",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [
+        "configuration_error"
+      ],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-004",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-005",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-006",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-007",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-008",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-009",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-010",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-011",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-012",
+      "diagnosis_correct": true,
+      "location_match": true,
+      "scope_match": true,
+      "mechanism_match": true,
+      "fault_category_match": true,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-013",
+      "diagnosis_correct": false,
+      "location_match": false,
+      "scope_match": false,
+      "mechanism_match": false,
+      "fault_category_match": false,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    },
+    {
+      "case_id": "semantic-rca-transfer-014",
+      "diagnosis_correct": false,
+      "location_match": false,
+      "scope_match": false,
+      "mechanism_match": false,
+      "fault_category_match": false,
+      "accepted_alternative_mechanisms": [],
+      "source_identity_aliases_respected": true,
+      "evaluation_scope": "diagnosis fields only"
+    }
+  ]
+}

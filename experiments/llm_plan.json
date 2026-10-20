@@ -1,0 +1,4894 @@
+{
+  "schema_version": 1,
+  "status": "PLANNED_NOT_EXECUTED",
+  "protocol": {
+    "revision": "logagent-matched-llm-v1",
+    "upstream_revision": "fdfbca65c87c36c6b06bddfa6d611544f13bfa34",
+    "models": [
+      {
+        "api_transport": "openai-responses",
+        "max_output_tokens": 16384,
+        "model": "gpt-5.6-sol",
+        "prompt_cache": "implicit-prefix-30m",
+        "provider": "openai",
+        "reasoning_effort": "medium",
+        "upstream_protocol": "transfer-v34-protocol.json"
+      },
+      {
+        "api_transport": "anthropic-compatible-messages",
+        "max_output_tokens": 16384,
+        "model": "deepseek-v4-pro",
+        "prompt_cache": "provider-automatic-prefix",
+        "provider": "deepseek",
+        "reasoning_effort": "high",
+        "upstream_protocol": "transfer-v34-protocol.json"
+      },
+      {
+        "api_transport": "anthropic-messages",
+        "max_output_tokens": 16384,
+        "model": "claude-fable-5-1",
+        "prompt_cache": "ephemeral-request-cache-control",
+        "provider": "anthropic",
+        "reasoning_effort": "high",
+        "upstream_protocol": "transfer-v34-protocol.json"
+      },
+      {
+        "api_transport": "bigmodel-chat-completions",
+        "max_output_tokens": 16384,
+        "model": "glm-5.3",
+        "prompt_cache": "provider-automatic-prefix",
+        "provider": "zhipu-bigmodel",
+        "reasoning_effort": "high",
+        "upstream_protocol": "transfer-v34-protocol.json"
+      },
+      {
+        "api_transport": "gemini-openai-chat-completions",
+        "max_output_tokens": 16384,
+        "model": "gemini-3.8-flash",
+        "prompt_cache": "provider-implicit-prefix",
+        "provider": "google",
+        "reasoning_effort": "high",
+        "upstream_protocol": "transfer-v34-two-model-extension-protocol.json"
+      },
+      {
+        "api_transport": "dashscope-cn-beijing-responses",
+        "max_output_tokens": 16384,
+        "model": "qwen3.8-max-0902",
+        "prompt_cache": "provider-session-prefix",
+        "provider": "alibaba-cloud-model-studio",
+        "reasoning_effort": "high",
+        "upstream_protocol": "transfer-v34-two-model-extension-protocol.json"
+      }
+    ],
+    "arms": [
+      "split_pillars",
+      "raw",
+      "semantic_graph",
+      "logagent"
+    ],
+    "repetitions": 2,
+    "max_tool_calls": 48,
+    "max_turns": 58,
+    "query_timeout_seconds": 120,
+    "runtime_package_versions": {
+      "agent-rca-bench": "0.1.0",
+      "openai": "3.35.1",
+      "anthropic": "1.15.0",
+      "pyarrow": "26.0.0",
+      "pydantic": "2.14.1",
+      "sqlglot": "30.22.0"
+    },
+    "provider_default_sampling": true,
+    "no_seed_sent": true,
+    "provider_concurrency": 1,
+    "case_independent_unit": true,
+    "arm_order": "deterministic counterbalanced rotation by case/model/repetition",
+    "new_arm": "raw tools plus one evidence-scored Thread navigation tool",
+    "identical_raw_graph_logagent_system_and_incident_prompts": true,
+    "primary_comparison": {
+      "baseline": "raw",
+      "treatment": "logagent",
+      "metric": "diagnosis_correct"
+    },
+    "secondary_comparison": {
+      "baseline": "semantic_graph",
+      "treatment": "logagent"
+    },
+    "primary_test": "paired sign test on per-case mean correctness; Holm across selected models",
+    "secondary_efficiency_family": "calls and input tokens; eligible cases only; Holm separately",
+    "missing_and_failed_cells": "included as failures, never silently dropped",
+    "historical_public_scores": "reference only; not matched samples",
+    "policy_status": "frozen port v1; no tuning against LLM outputs",
+    "answer_semantics": "unchanged upstream Top-1 scorer; declared identity aliases and alternative mechanisms accepted; alternative_candidates retained but not promoted to correct answers",
+    "files_sha256": {
+      "src/logagent_bench/__init__.py": "32ef06936324e926cca0645e7450dbefc0ded6ef11733021b10d6d52c9ec0c26",
+      "src/logagent_bench/adapter.py": "4636dab5ef4b6421d32b7afce0d4bedd179ced6ebdf6f432878e89b6585a1296",
+      "src/logagent_bench/canonical_scoring.py": "7669c9cb644cff93e9df4c7e0c62f9569350c8f3af00e73e98bc3e4c4bbfd929",
+      "src/logagent_bench/cli.py": "00918484c343ebbad1d550633423a99a6f312892467aca917b9c6a12db29b4bb",
+      "src/logagent_bench/datasets.py": "f2bf0868d8a8e19befcca7179219cb0032c09936dd371282e3e39b9e8d20dd41",
+      "src/logagent_bench/engine.py": "099f8d240237a61037eb1e70c361f1e3c448cfcb3abd6c54b920fac0fd2547b8",
+      "src/logagent_bench/experiment.py": "dc2c58143369f0b9f377349e40045f6d62377a50469758f4518b88ba6ff8331d",
+      "src/logagent_bench/llm_runner.py": "004a5c63d232c330e9b1fc573f9fe98cef41970b38aec6e51952871cc13b7643",
+      "src/logagent_bench/paired_stats.py": "3a3705425260c434e789eaaffeeaa2b9fcb61eec7dd751993d753e8f057e75a8",
+      "src/logagent_bench/runner.py": "f1d20dfd016c1f471c40686f5aa35d533123705d19ba139cfe96c426c9fec8ce",
+      "src/logagent_bench/scoring.py": "54f9e44cc427dfbab85f4f039f6d06e6469e82f298ce9241504ada0a29b3f965",
+      "src/logagent_bench/upstream_bridge.py": "3093779c4feee4ea534a7eca2efea3c901d8369e3c2af52cd9b105f3e8bef860",
+      "src/logagent_bench/worker.py": "bb70873e47e712f55d25a1afd5fcb3a7c32e472e363ea39ea12b6098acefdbf5",
+      "configs/hypothesis.yaml": "f00ba92235a99348339e127ec28f2ceb152d2b12d06e07452385b135a248e519",
+      "fixtures/openrca2-transfer-v32-selection.json": "bf91a0a576fb8b4a9c80616e7a2ade37edb879d28cc8ca1a07759c2188d0e565",
+      "fixtures/rca100-transfer-node-selection.json": "c0929a2d2b70cbb957fedc4d316bad895b77d1715f326953f8a017f7575fd546",
+      "fixtures/reference/openrca2-transfer-v32-selection.json": "bf91a0a576fb8b4a9c80616e7a2ade37edb879d28cc8ca1a07759c2188d0e565",
+      "fixtures/reference/rca100-transfer-node-selection.json": "c0929a2d2b70cbb957fedc4d316bad895b77d1715f326953f8a017f7575fd546",
+      "fixtures/upstream/transfer-v34-protocol.json": "398634ac21f576bf4fdc765162a06fad5cc49e7917676e42c423c1f2efece19b",
+      "fixtures/upstream/transfer-v34-two-model-extension-protocol.json": "c6e8e6551fb954504ca93858e6efc5b109a494fed68cb1c05bdd51e1d5892d82"
+    }
+  },
+  "protocol_sha256": "36f8ad27d09359bba1584faabc4e33f2080ea275169e63f7b23a77b141e48837",
+  "independent_cases": 14,
+  "expected_cells": 672,
+  "completed_cells": 0,
+  "models": [
+    {
+      "api_transport": "openai-responses",
+      "max_output_tokens": 16384,
+      "model": "gpt-5.6-sol",
+      "prompt_cache": "implicit-prefix-30m",
+      "provider": "openai",
+      "reasoning_effort": "medium",
+      "upstream_protocol": "transfer-v34-protocol.json"
+    },
+    {
+      "api_transport": "anthropic-compatible-messages",
+      "max_output_tokens": 16384,
+      "model": "deepseek-v4-pro",
+      "prompt_cache": "provider-automatic-prefix",
+      "provider": "deepseek",
+      "reasoning_effort": "high",
+      "upstream_protocol": "transfer-v34-protocol.json"
+    },
+    {
+      "api_transport": "anthropic-messages",
+      "max_output_tokens": 16384,
+      "model": "claude-fable-5-1",
+      "prompt_cache": "ephemeral-request-cache-control",
+      "provider": "anthropic",
+      "reasoning_effort": "high",
+      "upstream_protocol": "transfer-v34-protocol.json"
+    },
+    {
+      "api_transport": "bigmodel-chat-completions",
+      "max_output_tokens": 16384,
+      "model": "glm-5.3",
+      "prompt_cache": "provider-automatic-prefix",
+      "provider": "zhipu-bigmodel",
+      "reasoning_effort": "high",
+      "upstream_protocol": "transfer-v34-protocol.json"
+    },
+    {
+      "api_transport": "gemini-openai-chat-completions",
+      "max_output_tokens": 16384,
+      "model": "gemini-3.8-flash",
+      "prompt_cache": "provider-implicit-prefix",
+      "provider": "google",
+      "reasoning_effort": "high",
+      "upstream_protocol": "transfer-v34-two-model-extension-protocol.json"
+    },
+    {
+      "api_transport": "dashscope-cn-beijing-responses",
+      "max_output_tokens": 16384,
+      "model": "qwen3.8-max-0902",
+      "prompt_cache": "provider-session-prefix",
+      "provider": "alibaba-cloud-model-studio",
+      "reasoning_effort": "high",
+      "upstream_protocol": "transfer-v34-two-model-extension-protocol.json"
+    }
+  ],
+  "schedule": [
+    {
+      "cell_index": 0,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 1,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 2,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 3,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 4,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 5,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 6,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 7,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 8,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 9,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 10,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 11,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 12,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 13,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 14,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 15,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 16,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 17,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 18,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 19,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 20,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 21,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 22,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 23,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 24,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 25,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 26,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 27,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 28,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 29,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 30,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 31,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 32,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 33,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 34,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 35,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 36,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 37,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 38,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 39,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 40,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 41,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 42,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 43,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 44,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 45,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 46,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 47,
+      "case_id": "semantic-rca-transfer-001",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 48,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 49,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 50,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 51,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 52,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 53,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 54,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 55,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 56,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 57,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 58,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 59,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 60,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 61,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 62,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 63,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 64,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 65,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 66,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 67,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 68,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 69,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 70,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 71,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 72,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 73,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 74,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 75,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 76,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 77,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 78,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 79,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 80,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 81,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 82,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 83,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 84,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 85,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 86,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 87,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 88,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 89,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 90,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 91,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 92,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 93,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 94,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 95,
+      "case_id": "semantic-rca-transfer-002",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 96,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 97,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 98,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 99,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 100,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 101,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 102,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 103,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 104,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 105,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 106,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 107,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 108,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 109,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 110,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 111,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 112,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 113,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 114,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 115,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 116,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 117,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 118,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 119,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 120,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 121,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 122,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 123,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 124,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 125,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 126,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 127,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 128,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 129,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 130,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 131,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 132,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 133,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 134,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 135,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 136,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 137,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 138,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 139,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 140,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 141,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 142,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 143,
+      "case_id": "semantic-rca-transfer-003",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 144,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 145,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 146,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 147,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 148,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 149,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 150,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 151,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 152,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 153,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 154,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 155,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 156,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 157,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 158,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 159,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 160,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 161,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 162,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 163,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 164,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 165,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 166,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 167,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 168,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 169,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 170,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 171,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 172,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 173,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 174,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 175,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 176,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 177,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 178,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 179,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 180,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 181,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 182,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 183,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 184,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 185,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 186,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 187,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 188,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 189,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 190,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 191,
+      "case_id": "semantic-rca-transfer-004",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 192,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 193,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 194,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 195,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 196,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 197,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 198,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 199,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 200,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 201,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 202,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 203,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 204,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 205,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 206,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 207,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 208,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 209,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 210,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 211,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 212,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 213,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 214,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 215,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 216,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 217,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 218,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 219,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 220,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 221,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 222,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 223,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 224,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 225,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 226,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 227,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 228,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 229,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 230,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 231,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 232,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 233,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 234,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 235,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 236,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 237,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 238,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 239,
+      "case_id": "semantic-rca-transfer-005",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 240,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 241,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 242,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 243,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 244,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 245,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 246,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 247,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 248,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 249,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 250,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 251,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 252,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 253,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 254,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 255,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 256,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 257,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 258,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 259,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 260,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 261,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 262,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 263,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 264,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 265,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 266,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 267,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 268,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 269,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 270,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 271,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 272,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 273,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 274,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 275,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 276,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 277,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 278,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 279,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 280,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 281,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 282,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 283,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 284,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 285,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 286,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 287,
+      "case_id": "semantic-rca-transfer-006",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 288,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 289,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 290,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 291,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 292,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 293,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 294,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 295,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 296,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 297,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 298,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 299,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 300,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 301,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 302,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 303,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 304,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 305,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 306,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 307,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 308,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 309,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 310,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 311,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 312,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 313,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 314,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 315,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 316,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 317,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 318,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 319,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 320,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 321,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 322,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 323,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 324,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 325,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 326,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 327,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 328,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 329,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 330,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 331,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 332,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 333,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 334,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 335,
+      "case_id": "semantic-rca-transfer-007",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 336,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 337,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 338,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 339,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 340,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 341,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 342,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 343,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 344,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 345,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 346,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 347,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 348,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 349,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 350,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 351,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 352,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 353,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 354,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 355,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 356,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 357,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 358,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 359,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 360,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 361,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 362,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 363,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 364,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 365,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 366,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 367,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 368,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 369,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 370,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 371,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 372,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 373,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 374,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 375,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 376,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 377,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 378,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 379,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 380,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 381,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 382,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 383,
+      "case_id": "semantic-rca-transfer-008",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 384,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 385,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 386,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 387,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 388,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 389,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 390,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 391,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 392,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 393,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 394,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 395,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 396,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 397,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 398,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 399,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 400,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 401,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 402,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 403,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 404,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 405,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 406,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 407,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 408,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 409,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 410,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 411,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 412,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 413,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 414,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 415,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 416,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 417,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 418,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 419,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 420,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 421,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 422,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 423,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 424,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 425,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 426,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 427,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 428,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 429,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 430,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 431,
+      "case_id": "semantic-rca-transfer-009",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 432,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 433,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 434,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 435,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 436,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 437,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 438,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 439,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 440,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 441,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 442,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 443,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 444,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 445,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 446,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 447,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 448,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 449,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 450,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 451,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 452,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 453,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 454,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 455,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 456,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 457,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 458,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 459,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 460,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 461,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 462,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 463,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 464,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 465,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 466,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 467,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 468,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 469,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 470,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 471,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 472,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 473,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 474,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 475,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 476,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 477,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 478,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 479,
+      "case_id": "semantic-rca-transfer-010",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 480,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 481,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 482,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 483,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 484,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 485,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 486,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 487,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 488,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 489,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 490,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 491,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 492,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 493,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 494,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 495,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 496,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 497,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 498,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 499,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 500,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 501,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 502,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 503,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 504,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 505,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 506,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 507,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 508,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 509,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 510,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 511,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 512,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 513,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 514,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 515,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 516,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 517,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 518,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 519,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 520,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 521,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 522,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 523,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 524,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 525,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 526,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 527,
+      "case_id": "semantic-rca-transfer-011",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 528,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 529,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 530,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 531,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 532,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 533,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 534,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 535,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 536,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 537,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 538,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 539,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 540,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 541,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 542,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 543,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 544,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 545,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 546,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 547,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 548,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 549,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 550,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 551,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 552,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 553,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 554,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 555,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 556,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 557,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 558,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 559,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 560,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 561,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 562,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 563,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 564,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 565,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 566,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 567,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 568,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 569,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 570,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 571,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 572,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 573,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 574,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 575,
+      "case_id": "semantic-rca-transfer-012",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 576,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 577,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 578,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 579,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 580,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 581,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 582,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 583,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 584,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 585,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 586,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 587,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 588,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 589,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 590,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 591,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 592,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 593,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 594,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 595,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 596,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 597,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 598,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 599,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 600,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 601,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 602,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 603,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 604,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 605,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 606,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 607,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 608,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 609,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 610,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 611,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 612,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 613,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 614,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 615,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 616,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 617,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 618,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 619,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 620,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 621,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 622,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 623,
+      "case_id": "semantic-rca-transfer-013",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 624,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 625,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 626,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 627,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gpt-5.6-sol",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 628,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 629,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 630,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 631,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gpt-5.6-sol",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 632,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 633,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 634,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 635,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "deepseek-v4-pro",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 636,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 637,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 638,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 639,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "deepseek-v4-pro",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 640,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 641,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 642,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 643,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "claude-fable-5-1",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 644,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 645,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 646,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 647,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "claude-fable-5-1",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 648,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 649,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 650,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 651,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "glm-5.3",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 652,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 653,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 654,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 655,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "glm-5.3",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 656,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 657,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 658,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 659,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gemini-3.8-flash",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 660,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 661,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 662,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 663,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "gemini-3.8-flash",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 664,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "semantic_graph"
+    },
+    {
+      "cell_index": 665,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 666,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 667,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "qwen3.8-max-0902",
+      "repetition": 0,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 668,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "logagent"
+    },
+    {
+      "cell_index": 669,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "split_pillars"
+    },
+    {
+      "cell_index": 670,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "raw"
+    },
+    {
+      "cell_index": 671,
+      "case_id": "semantic-rca-transfer-014",
+      "model": "qwen3.8-max-0902",
+      "repetition": 1,
+      "arm": "semantic_graph"
+    }
+  ],
+  "accuracy": null,
+  "cost": null
+}

@@ -14,6 +14,23 @@
 
 각 사례 2회, 총 28회 실행에서 예측이 일치했습니다. 실행 오류는 0건이며, 기권 1건도 오답에 포함했습니다. 자세한 실패 사례와 한계는 [측정 설명](docs/MEASUREMENT_KO.md), 원본 구조화 집계는 [results/v1/results.json](results/v1/results.json)에 있습니다. **전체 OpenRCA2 공식 리더보드 성능이나 Capability 점수가 아닙니다.**
 
+원저장소 공식 scorer로 다시 채점해도 11/14입니다. [공식 채점 재검증](results/v1/upstream_scorer_validation.json)에는 허용 대체 기전과 source identity 별칭을 반영한 결과가 있습니다.
+
+## 논문용 LLM 비교
+
+- [원저장소 모델별 OpenRCA2·RCA100 정답률](docs/BASELINE_RESULTS.md): 원본 공개 JSON에서 계산한 Split·Raw·Graph의 과거 측정치.
+- [LLM 실험 조건·멀티 답변 처리·실행 방법](docs/PAPER_PROTOCOL.md): 같은 6개 모델·동일 prompt·48회 도구·58턴·16,384 출력 상한·같은 공식 scorer에 LogAgent 도구 arm을 추가합니다.
+- 14사례 × 6모델 × 4조건 × 2회 = **672개 cell** 계획입니다. 실제 LLM 호출은 **0회**입니다. API 키·고정 GreptimeDB build·Docker·가격 스냅샷이 없어 실행 전 점검에서 중단됐습니다.
+- 원래의 허용 대체 정답과 별칭은 보존하고, 여러 후보를 내놓았다는 이유로 Top-1을 정답 처리하지 않습니다.
+
+```bash
+python -m pip install -e '.[llm]'
+logagent-llm plan
+logagent-llm doctor --output experiments/environment_check.json
+```
+
+`doctor`는 모델을 호출하지 않습니다. 미실행 정확도는 `null`로 보관합니다. Python의 90%를 LLM 결과로 사용하지 않습니다.
+
 ## 실행
 
 ```bash

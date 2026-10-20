@@ -1,0 +1,98 @@
+{
+  "upstream_commit": "fdfbca65c87c36c6b06bddfa6d611544f13bfa34",
+  "source_url": "https://github.com/GreptimeTeam/agent-rca-bench/blob/fdfbca65c87c36c6b06bddfa6d611544f13bfa34/artifacts/measurement/agent-rca-v34-six-model.json",
+  "source_sha256": "a7e44c21746e49ecf7c17250d0162a5ba6541efe315698d58f0792ec5be6f3aa",
+  "status": "HISTORICAL_PUBLIC_RESULTS_NOT_NEW_RUNS",
+  "diagnosis_by_dataset": {
+    "openrca2": {
+      "cases": 10,
+      "diagnosis_correct": {
+        "raw": 106,
+        "semantic_graph": 112,
+        "split_pillars": 85
+      },
+      "diagnosis_correct_by_model": {
+        "claude-fable-5-1": {
+          "raw": 20,
+          "semantic_graph": 20,
+          "split_pillars": 20
+        },
+        "deepseek-v4-pro": {
+          "raw": 16,
+          "semantic_graph": 17,
+          "split_pillars": 10
+        },
+        "gemini-3.8-flash": {
+          "raw": 20,
+          "semantic_graph": 20,
+          "split_pillars": 17
+        },
+        "glm-5.3": {
+          "raw": 13,
+          "semantic_graph": 15,
+          "split_pillars": 9
+        },
+        "gpt-5.6-sol": {
+          "raw": 18,
+          "semantic_graph": 20,
+          "split_pillars": 13
+        },
+        "qwen3.8-max-0902": {
+          "raw": 19,
+          "semantic_graph": 20,
+          "split_pillars": 16
+        }
+      },
+      "runs": {
+        "raw": 120,
+        "semantic_graph": 120,
+        "split_pillars": 120
+      }
+    },
+    "rca100": {
+      "cases": 4,
+      "diagnosis_correct": {
+        "raw": 24,
+        "semantic_graph": 12,
+        "split_pillars": 20
+      },
+      "diagnosis_correct_by_model": {
+        "claude-fable-5-1": {
+          "raw": 6,
+          "semantic_graph": 3,
+          "split_pillars": 7
+        },
+        "deepseek-v4-pro": {
+          "raw": 2,
+          "semantic_graph": 1,
+          "split_pillars": 3
+        },
+        "gemini-3.8-flash": {
+          "raw": 5,
+          "semantic_graph": 4,
+          "split_pillars": 5
+        },
+        "glm-5.3": {
+          "raw": 1,
+          "semantic_graph": 1,
+          "split_pillars": 1
+        },
+        "gpt-5.6-sol": {
+          "raw": 4,
+          "semantic_graph": 0,
+          "split_pillars": 0
+        },
+        "qwen3.8-max-0902": {
+          "raw": 6,
+          "semantic_graph": 3,
+          "split_pillars": 4
+        }
+      },
+      "runs": {
+        "raw": 48,
+        "semantic_graph": 48,
+        "split_pillars": 48
+      }
+    }
+  }
+}
