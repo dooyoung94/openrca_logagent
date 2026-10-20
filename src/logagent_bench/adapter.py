@@ -21,17 +21,16 @@ def iter_records(path: Path):
     for batch in parquet.iter_batches(batch_size=2048):
         # Arrow's native unit is explicit. Never guess seconds from a value's
         # magnitude; nanosecond span alignment is preserved without floats.
-        stamps = {}
         for i, field in enumerate(batch.schema):
             if pa.types.is_timestamp(field.type):
                 factor = {"s": 10**9, "ms": 10**6, "us": 10**3, "ns": 1}[field.type.unit]
-                stamps[field.name] = [None if x is None else x * factor
-                                      for x in batch.column(i).cast(pa.int64()).to_pylist()]
-        records = batch.to_pylist()
-        for index, record in enumerate(records):
-            for name, values in stamps.items():
-                record[name] = values[index]
-            yield record
+                values = [None if x is None else x * factor
+                          for x in batch.column(i).cast(pa.int64()).to_pylist()]
+                # Replace Arrow's temporal column BEFORE Python conversion.
+                # Otherwise non-microsecond-aligned timestamps require pandas
+                # even though they would be overwritten by integers afterward.
+                batch = batch.set_column(i, pa.field(field.name, pa.int64()), pa.array(values, type=pa.int64()))
+        yield from batch.to_pylist()
 
 
 def iso_ns(value: str) -> int:

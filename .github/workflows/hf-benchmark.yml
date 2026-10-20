@@ -1,4 +1,4 @@
-name: Hugging Face RCA benchmark
+name: Hugging Face RCA benchmark (ns-safe)
 
 on:
   workflow_dispatch:

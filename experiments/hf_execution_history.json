@@ -16,6 +16,40 @@
       "scoring_performed": false,
       "actual_worker_stop_at": "2026-10-20T09:23:36.368660+00:00",
       "termination_note": "An earlier numeric-PID stop did not reach the isolated exec session. Unified exec session 87628 was then interrupted with Ctrl-C and exited 130; the prior model worker is no longer running. This caused transient CPU contention during v2. No correctness inspected."
+    },
+    {
+      "experiment": "hf-local-summary-pilot-v2",
+      "status": "RESOURCE_ABORTED_BEFORE_SCORING",
+      "actual_worker_stop_at": "2026-10-20T09:36:43.303181+00:00",
+      "completed_predictions": 12,
+      "started_cells": 13,
+      "accuracy": null,
+      "scoring_performed": false,
+      "reason": "Migrated same cases/model/prompts/settings to case-parallel GitHub Actions to reduce serial CPU wall time. No diagnosis content/correctness inspected.",
+      "frozen_protocol_sha256": "c82df1d6e60aa85e31dcc92d261a292df4fe8991f68635022e01493500ddfcb2",
+      "preserved_prediction_hashes": {
+        "semantic-rca-transfer-001-logagent_llm-rep0.json": "73e3b62fd877a7d6b8d93453ccbeb214660ccc487ea64e9c6eb9b49e588afb8f",
+        "semantic-rca-transfer-002-logagent_llm-rep1.json": "988c478be36cb9160e39a42ad6ececa0e57f9e9935d30aecb781074281449082",
+        "semantic-rca-transfer-001-logagent_llm-rep1.json": "a48e1f0ec5d31c82d2a90060a7cd22649e863556aa787316a41d28960bf5f5be",
+        "semantic-rca-transfer-003-logagent_llm-rep1.json": "ce2c5452d67a028b51b6c2d382936633503e672f760e19624c87435f43b4342e",
+        "semantic-rca-transfer-003-summary_llm-rep0.json": "0b07141fa08f642c1330018b23c8abf9383735bc7d53f1404c4d5e881f5ed637",
+        "semantic-rca-transfer-001-summary_llm-rep1.json": "69d35e4edd916ba308313de2a025cd29c08e8e86bc3b3d0f2151510a9467b28f",
+        "semantic-rca-transfer-003-logagent_llm-rep0.json": "667bbbcf6c6afcad3d0b9d36b6d9b3258447b7a5260d20bfe26b6c1d47430534",
+        "semantic-rca-transfer-002-summary_llm-rep0.json": "79b8b78544b512aebc0302dfe85b4312a1bc183c48bde2ea7567970ae1388a62",
+        "semantic-rca-transfer-001-summary_llm-rep0.json": "8842fdaa39977abdcdbf90bbcb90d0dbb4cd1b844c89a1c18654cf3bb59b4f56",
+        "semantic-rca-transfer-002-logagent_llm-rep0.json": "870df822a494fec73eb5c8d5af17883552ff745dc6fad2ec47ccecc317bad2bb",
+        "semantic-rca-transfer-002-summary_llm-rep1.json": "5de6e4561b9800d1da8ca9b4bb721cf076a9703b11c44e8f2141ef0ad84e7845",
+        "semantic-rca-transfer-003-summary_llm-rep1.json": "04679bd16bc9c883eec7413dffd93d6955e0d2ffbee1977096319fcb0daa685d"
+      }
+    },
+    {
+      "experiment": "hf-actions-parallel-v1-attempt1",
+      "status": "PREPROCESSING_ENVIRONMENT_FAILURE",
+      "github_run_id": 39401608774,
+      "source_commit": "2cf225e35f428cedcdae68cadf90140e69e7cc94",
+      "accuracy": null,
+      "scoring_performed": false,
+      "reason": "Clean runners lack pandas: Arrow to_pylist attempted datetime conversion before integer timestamp overwrite. Fix converts temporal columns to exact int ns before any Python conversion. No case/rule/model/scorer/prompt changes."
     }
   ]
 }
