@@ -50,6 +50,15 @@
       "accuracy": null,
       "scoring_performed": false,
       "reason": "Clean runners lack pandas: Arrow to_pylist attempted datetime conversion before integer timestamp overwrite. Fix converts temporal columns to exact int ns before any Python conversion. No case/rule/model/scorer/prompt changes."
+    },
+    {
+      "experiment": "hf-actions-parallel-v1-valid-inference",
+      "github_run_id": 39402033849,
+      "source_commit": "9653684a77395451687dec51df2cb11c9c7cb9d7",
+      "status": "56_PREDICTIONS_SEALED_COLLECTOR_PYTHON_VERSION_FIX",
+      "completed_predictions": 56,
+      "accuracy": null,
+      "reason": "All 14 inference jobs succeeded. Original scorer declares Python >=3.11,<3.12, so install on 3.12 was rejected. Offline-only collection on Python 3.11 reuses these exact 56 hash-sealed predictions. No model call is repeated."
     }
   ]
 }

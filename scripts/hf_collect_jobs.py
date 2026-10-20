@@ -14,6 +14,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--artifacts", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--source-commit", default=os.environ.get("GITHUB_SHA"))
+    p.add_argument("--source-run-id", default=os.environ.get("GITHUB_RUN_ID"))
     args = p.parse_args()
     cases = cohort()
     records, protocols, seals = [], [], {}
@@ -21,7 +23,8 @@ def main():
         directory = args.artifacts / ("hf-case-"+case["opaque_case_id"].rsplit("-", 1)[-1])
         protocol = json.loads((directory / "protocol.json").read_text())
         assert protocol["configuration"] == CONFIG and protocol["model"] == MODEL
-        assert protocol["source_commit"] == os.environ["GITHUB_SHA"]
+        assert protocol["source_commit"] == args.source_commit
+        assert str(protocol["github_run_id"]) == str(args.source_run_id)
         assert protocol["source_files_sha256"] == case["source_files_sha256"]
         assert protocol["cases"][0]["case_id"] == case["opaque_case_id"]
         manifest = json.loads((directory / "sealed_predictions.json").read_text())
@@ -71,7 +74,10 @@ def main():
                 "inference_seconds": round(sum(r["elapsed_seconds"] for r in rows), 3)}
     report = {"experiment": "hf-actions-parallel-v1", "status": "COMPLETED", "llm_calls": 56,
         "model": MODEL, "configuration": CONFIG, "benchmark_revision": BENCHMARK_REVISION,
-        "source_commit": os.environ["GITHUB_SHA"], "github_run_id": os.environ["GITHUB_RUN_ID"],
+        "source_commit": args.source_commit, "github_run_id": str(args.source_run_id),
+        "collection_source_commit": os.environ.get("GITHUB_SHA", "local"),
+        "collection_workflow_run_id": os.environ.get("GITHUB_RUN_ID", "local"),
+        "collection_script_sha256": digest(Path(__file__)),
         "summary_by_dataset": summary, "protocols_by_case": protocols, "records": records,
         "provider_api_fee": 0, "cost_note": "Public model local inference on standard public-repository Actions runners; not a paid model API.",
         "limitations": ["one small quantized HF model; not one of the six historical API configurations",
