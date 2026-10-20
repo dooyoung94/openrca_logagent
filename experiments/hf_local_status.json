@@ -1,9 +1,13 @@
 {
-  "experiment": "hf-local-summary-pilot-v2",
+  "experiment": "hf-actions-parallel-v1",
   "status": "RUNNING",
-  "observed_at": "2026-10-20T09:28:10.044125+00:00",
+  "observed_at": "2026-10-20T09:39:06.340051+00:00",
+  "github_run_id": 39402033849,
+  "source_commit": "9653684a77395451687dec51df2cb11c9c7cb9d7",
+  "run_url": "https://github.com/dooyoung94/openrca_logagent/actions/runs/39402033849",
   "planned_cells": 56,
-  "completed_cells": 4,
+  "independent_cases": 14,
   "accuracy": null,
-  "note": "Score only after all predictions are sealed. Original six-model experiment remains unexecuted."
+  "earlier_local_attempts": "retired without scoring; see hf_execution_history.json",
+  "original_six_model_experiment": "not executed"
 }

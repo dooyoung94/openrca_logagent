@@ -1,0 +1,6 @@
+{
+  "cases_checked": 14,
+  "packets_byte_identical": true,
+  "fact_or_prediction_rule_changed": false,
+  "change": "Cast temporal Arrow columns to integer nanoseconds before to_pylist; remove implicit pandas requirement."
+}
