@@ -10,7 +10,9 @@
 
 원저장소와 같은 모델 설정·system prompt·Raw 도구·48회 도구 한도·58턴·16,384 출력 상한·진단 및 인용 검증을 사용합니다. LogAgent 조건에는 원래 incident prompt 뒤에 후보 문맥이 추가되므로 **전체 입력이 동일하다고 주장하지 않습니다**. 선별 시간은 전체 소요 시간에 포함하고 별도로 기록합니다. [원저장소 처리 방식과 변경 내역](docs/UPSTREAM_PIPELINE_KO.md)을 확인하십시오.
 
-새 연결 방식 `logagent-matched-llm-v2`의 실제 모델 실행은 **0회**, 정답률은 **미측정**입니다. API 키·고정 GreptimeDB release build·Docker·가격 스냅샷이 필요합니다. 아래 HF 결과는 이전의 요약문 단일 응답 실험이며 새 방식의 점수가 아닙니다.
+원래 6개 API 모델의 `logagent-matched-llm-v2` 계획은 실제 호출 **0회**, 정답률 **미측정**입니다. 이 계획에는 API 키·고정 GreptimeDB release build·Docker·가격 스냅샷이 필요합니다.
+
+API 키 없이 실행하는 [Hugging Face + 원래 조사 루프 경로](docs/HF_TOOL_LOOP_KO.md)를 추가했습니다. 공개 Qwen3-1.7B 가중치와 실제 GreptimeDB 조회를 사용해 같은 14개 사례의 Raw HF / LogAgent+HF를 2회씩, 총 56개 cell로 비교합니다. [실행 상태](https://github.com/dooyoung94/openrca_logagent/actions/workflows/hf-tool-loop.yml)와 새 측정 결과는 이전 실험과 구분합니다. 아래 28.57%는 이전 요약문 단일 응답 실험의 점수입니다.
 
 ## 이전 Hugging Face 요약문 실험 결과
 
