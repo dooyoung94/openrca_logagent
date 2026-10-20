@@ -4,6 +4,12 @@
 
 운영 코드 전체나 Jennifer 전용 임계치를 복사하지 않습니다. 원래 ZIP의 해시와 설계 참조 모듈은 `provenance/architecture_source.json`에 기록합니다. Python 단독 실행에는 운영 DB, Neo4j 서버, Jennifer API, LLM API 키가 필요하지 않습니다.
 
+## 세 방법의 비교표와 논문 평가 범위
+
+[Python LogAgent / LogAgent+HF / 원래 GitHub 방식 비교표](docs/THREE_WAY_COMPARISON_KO.md)를 제공합니다. 같은 HF 모델의 Raw 대조군과 원래 6개 모델의 공개 Raw·Graph 결과를 함께 확인할 수 있습니다. [구조화 수치와 입력 해시](results/three_way_comparison.json), [고정 집계 조건](experiments/three_way_comparison_protocol.json)도 보관합니다.
+
+arXiv:2606.27154v2의 결과·인과 과정 평가 구분에 따라 지표 적용 범위를 점검했습니다. 현재 진단 정답률은 논문의 원인 집합 EM·F1과 다릅니다. 전파 그래프와 SQL 재실행 평가가 필요한 PR·Node/Edge F1·SQL Exec은 아직 산출하지 않았습니다. 비교표는 지정된 HF 실행이 완료되면 저장된 56개 결과를 검증해 갱신하며 추론을 다시 실행하지 않습니다.
+
 ## 현재 LLM 연결 방식
 
 **LogAgent가 상위 5개 후보 선별 → 원저장소 LLM이 SQL·PromQL로 반복 조사 → 원래 `submit_diagnosis`로 최종 제출 → 원래 채점기** 순서입니다. 후보는 첫 모델 호출 전에 제공하며, 후보가 틀리거나 없으면 LLM이 다른 원인도 조사합니다. Python의 Top-1을 LLM의 최종 답으로 고정하지 않습니다.
@@ -98,7 +104,7 @@ Windows PowerShell에서는 활성화 명령을 `.venv\Scripts\Activate.ps1`로 
 
 `causal_scope`, 실제 원인 위치(컴포넌트·방향 있는 호출 간선·노드), `fault_category`, `mechanism_code`가 모두 맞아야 정답입니다. 근거 부족에 따른 기권과 실행 실패도 전체 분모에 포함합니다. 위치 정답률과 장애 유형 정답률은 별도 집계합니다.
 
-상위 후보의 Thread 점수는 근거 지지 점수이며 정답 확률이 아닙니다. 위 Python 단독 결과는 공개 보고서의 Capability 점수나 유료 LLM 도구 루프의 결과가 아니므로 그 점수와 직접 비교하지 않습니다. 현재 LLM 연결 방식은 원래 도구 루프와 SQL 인용 검증기를 재사용하지만 실제 모델 실행 전입니다.
+상위 후보의 Thread 점수는 근거 지지 점수이며 정답 확률이 아닙니다. 위 Python 단독 결과는 공개 보고서의 Capability 점수나 유료 LLM 도구 루프의 결과가 아니므로 그 점수와 직접 비교하지 않습니다. 현재 HF 경로는 원래 도구 루프와 SQL 인용 검증기를 재사용합니다. [비교표](docs/THREE_WAY_COMPARISON_KO.md)에서 해당 실행의 집계 상태를 확인할 수 있으며, 원래 6개 API 모델의 재실행과 구분합니다.
 
 ## 정답 유출 방지
 

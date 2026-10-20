@@ -1,0 +1,365 @@
+{
+  "schema_version": 1,
+  "comparison_id": "selected-cohort-three-way-v1",
+  "primary_metric": {
+    "id": "upstream_diagnosis_accuracy",
+    "definition": "Unchanged upstream diagnosis_correct: causal scope, locus, fault category and accepted mechanism must all match.",
+    "not_equivalent_to": [
+      "paper EM",
+      "paper AnySvc",
+      "paper PR",
+      "paper SQL Exec",
+      "upstream Capability"
+    ],
+    "denominator": "all scheduled completed investigations, including abstentions, invalid submissions and runner failures",
+    "incomplete_cohort": "accuracy remains null; never replace pending investigations with either correct or incorrect outcomes",
+    "independent_unit": "case; repetitions and multiple backbones do not create new independent cases"
+  },
+  "cohort": {
+    "openrca2": 10,
+    "rca100": 4,
+    "independent_cases": 14
+  },
+  "methods": [
+    {
+      "id": "python_logagent",
+      "label": "① Python LogAgent",
+      "llm": "사용 안 함",
+      "status": "COMPLETED",
+      "results": {
+        "openrca2": {
+          "independent_cases": 10,
+          "executions": 20,
+          "correct_executions": 18,
+          "diagnosis_accuracy": 0.9,
+          "location_accuracy": 1.0
+        },
+        "rca100": {
+          "independent_cases": 4,
+          "executions": 8,
+          "correct_executions": 4,
+          "diagnosis_accuracy": 0.5,
+          "location_accuracy": 0.5
+        },
+        "all": {
+          "independent_cases": 14,
+          "executions": 28,
+          "correct_executions": 22,
+          "diagnosis_accuracy": 0.7857142857142857,
+          "location_accuracy": 0.8571428571428571
+        }
+      }
+    },
+    {
+      "id": "logagent_hf",
+      "label": "② LogAgent 후보 + 원래 LLM 루프",
+      "llm": "Qwen3-1.7B Q8_0 (HF)",
+      "status": "NOT_AGGREGATED",
+      "results": {
+        "openrca2": null,
+        "rca100": null,
+        "all": null
+      }
+    },
+    {
+      "id": "raw_hf",
+      "label": "③ 원래 Raw LLM 루프 — 동일 HF 대조군",
+      "llm": "Qwen3-1.7B Q8_0 (HF)",
+      "status": "NOT_AGGREGATED",
+      "results": {
+        "openrca2": null,
+        "rca100": null,
+        "all": null
+      }
+    }
+  ],
+  "historical_references": [
+    {
+      "id": "raw",
+      "label": "원저장소 Raw · 공개 6개 모델 합산",
+      "status": "HISTORICAL_REFERENCE",
+      "results": {
+        "openrca2": {
+          "correct_executions": 106,
+          "executions": 120,
+          "diagnosis_accuracy": 0.8833333333333333
+        },
+        "rca100": {
+          "correct_executions": 24,
+          "executions": 48,
+          "diagnosis_accuracy": 0.5
+        },
+        "all": {
+          "correct_executions": 130,
+          "executions": 168,
+          "diagnosis_accuracy": 0.7738095238095238
+        }
+      }
+    },
+    {
+      "id": "semantic_graph",
+      "label": "원저장소 Graph · 공개 6개 모델 합산",
+      "status": "HISTORICAL_REFERENCE",
+      "results": {
+        "openrca2": {
+          "correct_executions": 112,
+          "executions": 120,
+          "diagnosis_accuracy": 0.9333333333333333
+        },
+        "rca100": {
+          "correct_executions": 12,
+          "executions": 48,
+          "diagnosis_accuracy": 0.25
+        },
+        "all": {
+          "correct_executions": 124,
+          "executions": 168,
+          "diagnosis_accuracy": 0.7380952380952381
+        }
+      }
+    },
+    {
+      "id": "split_pillars",
+      "label": "원저장소 Split · 공개 6개 모델 합산",
+      "status": "HISTORICAL_REFERENCE",
+      "results": {
+        "openrca2": {
+          "correct_executions": 85,
+          "executions": 120,
+          "diagnosis_accuracy": 0.7083333333333334
+        },
+        "rca100": {
+          "correct_executions": 20,
+          "executions": 48,
+          "diagnosis_accuracy": 0.4166666666666667
+        },
+        "all": {
+          "correct_executions": 105,
+          "executions": 168,
+          "diagnosis_accuracy": 0.625
+        }
+      }
+    }
+  ],
+  "hf_progress": {
+    "checked_at": "2026-10-20T13:43:12.032Z",
+    "source_run_id": "39419829987",
+    "source_commit": "5da5d75fa88d555acbec615992a7eaef2dae9b52",
+    "run_status": "in_progress",
+    "run_conclusion": null,
+    "completed_case_jobs": 5,
+    "failed_case_jobs": 0,
+    "jobs": [
+      {
+        "id": 118617713757,
+        "name": "HF loop case 010",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118617714025,
+        "name": "HF loop case 005",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118617714051,
+        "name": "HF loop case 004",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118617714061,
+        "name": "HF loop case 002",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118617714170,
+        "name": "HF loop case 008",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118617714182,
+        "name": "HF loop case 014",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118617714198,
+        "name": "HF loop case 001",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118617714233,
+        "name": "HF loop case 009",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118617714235,
+        "name": "HF loop case 011",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118617714278,
+        "name": "HF loop case 006",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118617714321,
+        "name": "HF loop case 007",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118617714326,
+        "name": "HF loop case 012",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118617714343,
+        "name": "HF loop case 013",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118617714422,
+        "name": "HF loop case 003",
+        "status": "in_progress",
+        "conclusion": null
+      }
+    ]
+  },
+  "paper_alignment": "retrospective design and metric-coverage audit; not an exact paper replication or preregistration",
+  "paper_metrics": {
+    "python_logagent": {
+      "EM": {
+        "value": null,
+        "reason": "not computed: saved diagnoses use typed loci and a different mechanism ontology, not the paper root_causes set contract"
+      },
+      "F1": {
+        "value": null,
+        "reason": "not computed: same root-set contract and fault-kind equivalence gap"
+      },
+      "Precision": {
+        "value": null,
+        "reason": "not computed: same root-set contract and fault-kind equivalence gap"
+      },
+      "Recall": {
+        "value": null,
+        "reason": "not computed: same root-set contract and fault-kind equivalence gap"
+      },
+      "AnySvc": {
+        "value": null,
+        "reason": "not computed: locus accuracy includes directed edges and infrastructure nodes and is not a service-only hit metric"
+      },
+      "PR": {
+        "value": null,
+        "reason": "not computed: no final predicted propagation graph; RCA100 packages lack a paper-format verified causal graph"
+      },
+      "Node F1": {
+        "value": null,
+        "reason": "not computed: same graph-output and graph-ground-truth gap"
+      },
+      "Edge F1": {
+        "value": null,
+        "reason": "not computed: same graph-output and graph-ground-truth gap"
+      },
+      "SQL Exec": {
+        "value": null,
+        "reason": "not computed: original query-ID citation validity is not the paper's per-case nonempty DuckDB evidence-SQL replay metric"
+      }
+    },
+    "logagent_hf": {
+      "EM": {
+        "value": null,
+        "reason": "not computed: saved diagnoses use typed loci and a different mechanism ontology, not the paper root_causes set contract"
+      },
+      "F1": {
+        "value": null,
+        "reason": "not computed: same root-set contract and fault-kind equivalence gap"
+      },
+      "Precision": {
+        "value": null,
+        "reason": "not computed: same root-set contract and fault-kind equivalence gap"
+      },
+      "Recall": {
+        "value": null,
+        "reason": "not computed: same root-set contract and fault-kind equivalence gap"
+      },
+      "AnySvc": {
+        "value": null,
+        "reason": "not computed: locus accuracy includes directed edges and infrastructure nodes and is not a service-only hit metric"
+      },
+      "PR": {
+        "value": null,
+        "reason": "not computed: no final predicted propagation graph; RCA100 packages lack a paper-format verified causal graph"
+      },
+      "Node F1": {
+        "value": null,
+        "reason": "not computed: same graph-output and graph-ground-truth gap"
+      },
+      "Edge F1": {
+        "value": null,
+        "reason": "not computed: same graph-output and graph-ground-truth gap"
+      },
+      "SQL Exec": {
+        "value": null,
+        "reason": "not computed: original query-ID citation validity is not the paper's per-case nonempty DuckDB evidence-SQL replay metric"
+      }
+    },
+    "raw_hf": {
+      "EM": {
+        "value": null,
+        "reason": "not computed: saved diagnoses use typed loci and a different mechanism ontology, not the paper root_causes set contract"
+      },
+      "F1": {
+        "value": null,
+        "reason": "not computed: same root-set contract and fault-kind equivalence gap"
+      },
+      "Precision": {
+        "value": null,
+        "reason": "not computed: same root-set contract and fault-kind equivalence gap"
+      },
+      "Recall": {
+        "value": null,
+        "reason": "not computed: same root-set contract and fault-kind equivalence gap"
+      },
+      "AnySvc": {
+        "value": null,
+        "reason": "not computed: locus accuracy includes directed edges and infrastructure nodes and is not a service-only hit metric"
+      },
+      "PR": {
+        "value": null,
+        "reason": "not computed: no final predicted propagation graph; RCA100 packages lack a paper-format verified causal graph"
+      },
+      "Node F1": {
+        "value": null,
+        "reason": "not computed: same graph-output and graph-ground-truth gap"
+      },
+      "Edge F1": {
+        "value": null,
+        "reason": "not computed: same graph-output and graph-ground-truth gap"
+      },
+      "SQL Exec": {
+        "value": null,
+        "reason": "not computed: original query-ID citation validity is not the paper's per-case nonempty DuckDB evidence-SQL replay metric"
+      }
+    }
+  },
+  "source_sha256": {
+    "experiments/three_way_comparison_protocol.json": "e820194288798920a1fb3bea96bc53f3711aef9945df7339d14d78ef63d4ca54",
+    "results/v1/results.json": "242b11d0773e8027a056abbd1f0db94c31d25d0426b42374db3b08a00d0bfb87",
+    "results/v1/upstream_scorer_validation.json": "eeb3dc89961159da18c9059719c975633420c7d16ca09b325cd82db010887e72",
+    "results/baseline_public.json": "53cae99b88dddabc6419b51683bbca9b3a48fb92af13c1cf0ae4e1e70b1b4643",
+    "experiments/hf_tool_loop_progress.json": "344392fed9e4ac33aeb587e4450b4efd7bcc73d4f75d437d39a224c6e7c356bb",
+    "experiments/paper_graph_availability.json": "9d8c7069cd1de16822f0b408c1b688878182be021e3df9e360a6e5ee8c166b11",
+    "experiments/historical_source_verification.json": "747105927f42ce24e32f15a0def6fb6b94f79c7d50f4619c302ea2d07b224cb6"
+  }
+}

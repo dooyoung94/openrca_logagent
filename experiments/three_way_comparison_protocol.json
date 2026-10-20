@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "comparison_id": "selected-cohort-three-way-v1",
+  "created_at": "2026-10-20",
+  "paper": {
+    "title": "OpenRCA 2.0: From Outcome Labels to Causal Process Supervision",
+    "url": "https://arxiv.org/pdf/2606.27154v2",
+    "sections": ["3.1", "3.2", "F.2", "F.3", "G.1", "G.2"],
+    "alignment": "retrospective design and metric-coverage audit; not an exact paper replication or preregistration",
+    "archival_instances": 500
+  },
+  "benchmark_revision": "fdfbca65c87c36c6b06bddfa6d611544f13bfa34",
+  "cohort": {"openrca2": 10, "rca100": 4, "independent_cases": 14},
+  "primary_metric": {
+    "id": "upstream_diagnosis_accuracy",
+    "definition": "Unchanged upstream diagnosis_correct: causal scope, locus, fault category and accepted mechanism must all match.",
+    "not_equivalent_to": ["paper EM", "paper AnySvc", "paper PR", "paper SQL Exec", "upstream Capability"],
+    "denominator": "all scheduled completed investigations, including abstentions, invalid submissions and runner failures",
+    "incomplete_cohort": "accuracy remains null; never replace pending investigations with either correct or incorrect outcomes",
+    "independent_unit": "case; repetitions and multiple backbones do not create new independent cases"
+  },
+  "methods": [
+    {"id": "python_logagent", "label": "Python LogAgent", "role": "architecture without LLM", "source": "results/v1/results.json"},
+    {"id": "logagent_hf", "label": "LogAgent candidates + original Raw loop + HF", "role": "candidate-selection treatment"},
+    {"id": "raw_hf", "label": "Original Raw loop + same HF", "role": "matched LLM control"}
+  ],
+  "hf_measurement": {
+    "source_run_id": "39419829987",
+    "source_commit": "5da5d75fa88d555acbec615992a7eaef2dae9b52",
+    "experiment": "hf-original-tool-loop-v1",
+    "source": "results/hf-tool-loop-39419829987/results.json",
+    "arms": ["raw_hf", "logagent_hf"],
+    "seeds": [17, 29],
+    "required_cells": 56,
+    "model_repo": "Qwen/Qwen3-1.7B-GGUF",
+    "model_revision": "90862c4b9d2787eaed51d12237eafdfe7c5f6077",
+    "model_sha256": "061b54daade076b5d3362dac252678d17da8c68f07560be70818cace6590cb1a",
+    "selection_policy": "Use this preselected run only, never select the best later run.",
+    "rerun_on_report_refresh": false
+  },
+  "historical_reference": {
+    "source": "results/baseline_public.json",
+    "model_configurations": 6,
+    "repetitions": 2,
+    "arms": ["split_pillars", "raw", "semantic_graph"],
+    "role": "historical descriptive reference, not a matched HF control"
+  },
+  "answer_semantics": {
+    "selected_case_root_loci": "one component, directed edge, or infrastructure node per case",
+    "directed_edge": "both endpoints and direction must match; do not relax to one endpoint",
+    "accepted_mechanisms": "preserve the source scorer's disjunction, including configuration_error for cases 001-003",
+    "alternative_candidates": "not additional asserted root causes and not an any-candidate correctness rule",
+    "multi_fault": "not demonstrated by these 14 selected cases; do not claim multi-fault-set performance"
+  },
+  "paper_metric_coverage": {
+    "EM": "not computed: saved diagnoses use typed loci and a different mechanism ontology, not the paper root_causes set contract",
+    "F1": "not computed: same root-set contract and fault-kind equivalence gap",
+    "Precision": "not computed: same root-set contract and fault-kind equivalence gap",
+    "Recall": "not computed: same root-set contract and fault-kind equivalence gap",
+    "AnySvc": "not computed: locus accuracy includes directed edges and infrastructure nodes and is not a service-only hit metric",
+    "PR": "not computed: no final predicted propagation graph; RCA100 packages lack a paper-format verified causal graph",
+    "Node F1": "not computed: same graph-output and graph-ground-truth gap",
+    "Edge F1": "not computed: same graph-output and graph-ground-truth gap",
+    "SQL Exec": "not computed: original query-ID citation validity is not the paper's per-case nonempty DuckDB evidence-SQL replay metric"
+  },
+  "claims": {
+    "full_paper_evaluation_completed": false,
+    "historical_six_backbones_rerun": false,
+    "unseen_holdout": false,
+    "posthoc_prediction_repair": false,
+    "headline_superiority_test": "not reported; historical and new models differ; paired HF analysis needs a complete cohort"
+  }
+}

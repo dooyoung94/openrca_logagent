@@ -1,0 +1,95 @@
+{
+  "checked_at": "2026-10-20T13:43:12.032Z",
+  "source_run_id": "39419829987",
+  "source_commit": "5da5d75fa88d555acbec615992a7eaef2dae9b52",
+  "run_status": "in_progress",
+  "run_conclusion": null,
+  "completed_case_jobs": 5,
+  "failed_case_jobs": 0,
+  "jobs": [
+    {
+      "id": 118617713757,
+      "name": "HF loop case 010",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 118617714025,
+      "name": "HF loop case 005",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 118617714051,
+      "name": "HF loop case 004",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 118617714061,
+      "name": "HF loop case 002",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 118617714170,
+      "name": "HF loop case 008",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 118617714182,
+      "name": "HF loop case 014",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 118617714198,
+      "name": "HF loop case 001",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 118617714233,
+      "name": "HF loop case 009",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 118617714235,
+      "name": "HF loop case 011",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 118617714278,
+      "name": "HF loop case 006",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 118617714321,
+      "name": "HF loop case 007",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 118617714326,
+      "name": "HF loop case 012",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 118617714343,
+      "name": "HF loop case 013",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 118617714422,
+      "name": "HF loop case 003",
+      "status": "in_progress",
+      "conclusion": null
+    }
+  ]
+}

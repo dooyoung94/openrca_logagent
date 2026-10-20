@@ -1,0 +1,8 @@
+{
+  "verified_at": "2026-10-20T13:43:21.502964+00:00",
+  "source_url": "https://github.com/GreptimeTeam/agent-rca-bench/blob/fdfbca65c87c36c6b06bddfa6d611544f13bfa34/artifacts/measurement/agent-rca-v34-six-model.json",
+  "source_sha256": "a7e44c21746e49ecf7c17250d0162a5ba6541efe315698d58f0792ec5be6f3aa",
+  "bytes": 1448760,
+  "dataset_counts_match": true,
+  "content_redistributed": false
+}

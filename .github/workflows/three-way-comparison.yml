@@ -1,0 +1,71 @@
+name: Refresh paper comparison tables
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ['HF original RCA tool loop']
+    branches: [main]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_three_way_comparison.py'
+      - 'experiments/three_way_comparison_protocol.json'
+      - 'results/hf-tool-loop-39419829987/results.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: paper-comparison-main
+  cancel-in-progress: true
+
+jobs:
+  report:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Record the fixed inference run status
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          from datetime import datetime, timezone
+          from pathlib import Path
+          spec = json.loads(Path('experiments/three_way_comparison_protocol.json').read_text())['hf_measurement']
+          url = f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{spec['source_run_id']}"
+          def get(endpoint):
+              request = urllib.request.Request(endpoint, headers={'Authorization': f"Bearer {os.environ['GH_TOKEN']}", 'Accept': 'application/vnd.github+json'})
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  return json.load(response)
+          run, jobs = get(url), get(url + '/jobs?per_page=100')['jobs']
+          if run['head_sha'] != spec['source_commit']:
+              raise ValueError('Inference source differs from the comparison protocol')
+          cases = [j for j in jobs if j['name'].startswith('HF loop case ')]
+          progress = {'checked_at': datetime.now(timezone.utc).isoformat(), 'source_run_id': spec['source_run_id'], 'source_commit': run['head_sha'], 'run_status': run['status'], 'run_conclusion': run['conclusion'], 'completed_case_jobs': sum(j['status'] == 'completed' for j in cases), 'failed_case_jobs': sum(j['status'] == 'completed' and j['conclusion'] != 'success' for j in cases), 'jobs': [{'id': j['id'], 'name': j['name'], 'status': j['status'], 'conclusion': j['conclusion']} for j in cases]}
+          Path('experiments/hf_tool_loop_progress.json').write_text(json.dumps(progress, indent=2) + '\n')
+          PY
+      - name: Validate and render stored measurements only
+        run: |
+          python -m unittest discover -s tests -p 'test_three_way_comparison.py' -v
+          python scripts/build_three_way_comparison.py
+      - name: Publish refreshed tables without rerunning inference
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/hf_tool_loop_progress.json results/three_way_comparison.json docs/THREE_WAY_COMPARISON_KO.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'docs: refresh fixed-cohort paper comparison tables'
+          git pull --rebase origin main
+          git push origin HEAD:main
